@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOL_2019", "GOL_2019\GOL_2019.csproj", "{C70B6E93-25EA-4FE2-BC1E-BBC75A7BF268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database_CL", "Database_CL\Database_CL.csproj", "{C1D20D56-3205-4264-8500-9F1B27FD7B94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C70B6E93-25EA-4FE2-BC1E-BBC75A7BF268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70B6E93-25EA-4FE2-BC1E-BBC75A7BF268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70B6E93-25EA-4FE2-BC1E-BBC75A7BF268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D20D56-3205-4264-8500-9F1B27FD7B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D20D56-3205-4264-8500-9F1B27FD7B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D20D56-3205-4264-8500-9F1B27FD7B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D20D56-3205-4264-8500-9F1B27FD7B94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
