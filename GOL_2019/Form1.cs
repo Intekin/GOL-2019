@@ -10,16 +10,15 @@ using System.Windows.Forms;
 
 namespace GOL_2019
 {
-    public partial class Form1 : Form
-    {
-
+  public partial class Form1 : Form
+  {
+    GameLogic gameLogic;
 
         public Form1()
         {
             InitializeComponent();
 
             GameLogic gl = new GameLogic(8,10);
-
 
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.RowTemplate.Height = 25;
@@ -42,11 +41,18 @@ namespace GOL_2019
                 }
         }
 
-        private void btn_StartNewGame_Click(object sender, EventArgs e)
-        {
+    private void btn_StartNewGame_Click(object sender, EventArgs e)
+    {
+      gameLogic = new GameLogic();
 
-        }
+      // Load gameLogic.GameGrid into GameGrid (DataGridView control)
+
+    }
+
+    private void btn_NextGeneration_Click(object sender, EventArgs e)
+    {
+      // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
+      gameLogic.Iterate();
+
     }
 }
-
-
