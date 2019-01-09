@@ -10,13 +10,20 @@ using System.Windows.Forms;
 
 namespace GOL_2019
 {
-    public partial class Form1 : Form
+  public partial class Form1 : Form
+  {
+
+
+    public Form1()
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+
+    private void btn_StartNewGame_Click(object sender, EventArgs e)
+    {
+
+    }
+  }
 }
     
     
