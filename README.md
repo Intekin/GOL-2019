@@ -3,9 +3,9 @@ School Laberation
 
 GUI - Sara
 
-Spellogik - ?
+Spellogik - Leif, Christoffer
 
-Databas - ?
+Databas - Sara, Simon
 
 ? - ?
 
@@ -13,4 +13,6 @@ Vi får försöka fylla ut detta allt eftersom.
 
 Tisdag - kl 13-13:30.
 
-Onsdag - kl 10- 
+Onsdag - kl 12:30-16:20
+
+Torsdag
