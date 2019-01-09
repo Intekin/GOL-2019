@@ -19,7 +19,7 @@ namespace GOL_2019
         {
             InitializeComponent();
 
-            gl = new GameLogic(8, 10);
+            gl = new GameLogic(8, 16);
 
 
         }
