@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TestButton = new System.Windows.Forms.Button();
             this.tb_NameOfGame = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_StartNewGame = new System.Windows.Forms.Button();
@@ -40,7 +41,6 @@
             this.GameGrid = new System.Windows.Forms.DataGridView();
             this.btn_NextGeneration = new System.Windows.Forms.Button();
             this.btn_EndGame = new System.Windows.Forms.Button();
-            this.TestButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).BeginInit();
@@ -64,6 +64,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // TestButton
+            // 
+            this.TestButton.Location = new System.Drawing.Point(111, 291);
+            this.TestButton.Name = "TestButton";
+            this.TestButton.Size = new System.Drawing.Size(75, 23);
+            this.TestButton.TabIndex = 8;
+            this.TestButton.Text = "Test";
+            this.TestButton.UseVisualStyleBackColor = true;
+            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
             // 
             // tb_NameOfGame
             // 
@@ -136,11 +146,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.GameGrid);
-            this.groupBox2.Location = new System.Drawing.Point(269, 10);
+            this.groupBox2.Location = new System.Drawing.Point(280, 13);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(310, 309);
+            this.groupBox2.Size = new System.Drawing.Size(290, 311);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Of Life";
@@ -152,7 +162,7 @@
             this.GameGrid.Margin = new System.Windows.Forms.Padding(2);
             this.GameGrid.Name = "GameGrid";
             this.GameGrid.RowTemplate.Height = 24;
-            this.GameGrid.Size = new System.Drawing.Size(300, 286);
+            this.GameGrid.Size = new System.Drawing.Size(285, 285);
             this.GameGrid.TabIndex = 0;
             // 
             // btn_NextGeneration
@@ -175,16 +185,7 @@
             this.btn_EndGame.TabIndex = 4;
             this.btn_EndGame.Text = "End Game";
             this.btn_EndGame.UseVisualStyleBackColor = true;
-            // 
-            // TestButton
-            // 
-            this.TestButton.Location = new System.Drawing.Point(111, 291);
-            this.TestButton.Name = "TestButton";
-            this.TestButton.Size = new System.Drawing.Size(75, 23);
-            this.TestButton.TabIndex = 8;
-            this.TestButton.Text = "Test";
-            this.TestButton.UseVisualStyleBackColor = true;
-            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
+            this.btn_EndGame.Click += new System.EventHandler(this.btn_EndGame_Click);
             // 
             // Form1
             // 
