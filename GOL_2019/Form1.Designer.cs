@@ -37,12 +37,12 @@
       this.label1 = new System.Windows.Forms.Label();
       this.lbx_SavedGames = new System.Windows.Forms.ListBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
-      this.dataGridView1 = new System.Windows.Forms.DataGridView();
+      this.GameGrid = new System.Windows.Forms.DataGridView();
       this.btn_NextGeneration = new System.Windows.Forms.Button();
       this.btn_EndGame = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).BeginInit();
       this.SuspendLayout();
       // 
       // groupBox1
@@ -133,7 +133,7 @@
       // 
       // groupBox2
       // 
-      this.groupBox2.Controls.Add(this.dataGridView1);
+      this.groupBox2.Controls.Add(this.GameGrid);
       this.groupBox2.Location = new System.Drawing.Point(269, 10);
       this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
       this.groupBox2.Name = "groupBox2";
@@ -143,15 +143,15 @@
       this.groupBox2.TabStop = false;
       this.groupBox2.Text = "Game Of Life";
       // 
-      // dataGridView1
+      // GameGrid
       // 
-      this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dataGridView1.Location = new System.Drawing.Point(5, 18);
-      this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-      this.dataGridView1.Name = "dataGridView1";
-      this.dataGridView1.RowTemplate.Height = 24;
-      this.dataGridView1.Size = new System.Drawing.Size(300, 286);
-      this.dataGridView1.TabIndex = 0;
+      this.GameGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.GameGrid.Location = new System.Drawing.Point(5, 18);
+      this.GameGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+      this.GameGrid.Name = "GameGrid";
+      this.GameGrid.RowTemplate.Height = 24;
+      this.GameGrid.Size = new System.Drawing.Size(300, 286);
+      this.GameGrid.TabIndex = 0;
       // 
       // btn_NextGeneration
       // 
@@ -162,6 +162,7 @@
       this.btn_NextGeneration.TabIndex = 3;
       this.btn_NextGeneration.Text = "Next Generation";
       this.btn_NextGeneration.UseVisualStyleBackColor = true;
+      this.btn_NextGeneration.Click += new System.EventHandler(this.btn_NextGeneration_Click);
       // 
       // btn_EndGame
       // 
@@ -188,7 +189,7 @@
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       this.groupBox2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).EndInit();
       this.ResumeLayout(false);
 
         }
@@ -205,7 +206,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_NextGeneration;
         private System.Windows.Forms.Button btn_EndGame;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView GameGrid;
     }
 }
 
