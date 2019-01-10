@@ -11,7 +11,10 @@ namespace GOL_2019
     {
         GameLogic gl;
         GameView gameView;
+        GameData currentGame;
         List<GameData> gameDatas;
+        BindingSource bindingSource;
+
 
         public Form1()
         {
@@ -20,6 +23,17 @@ namespace GOL_2019
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
             gameDatas = new List<GameData>();
+
+            // Databinding
+            bindingSource = new BindingSource();
+            bindingSource.DataSource = gameDatas;
+            lbx_SavedGames.DataSource = bindingSource;
+            lbx_SavedGames.DataSourceChanged += DataSourceChanged;
+        }
+
+        private void DataSourceChanged(object sender, EventArgs e)
+        {
+          MessageBox.Show("DataSource changed!");
         }
 
         private void GameGrid_SelectionChanged(object sender, EventArgs e)
@@ -34,14 +48,6 @@ namespace GOL_2019
             bool nameValidated = false;
 
 
-            // Can't iterate without a GameLogic instance
-            btn_NextGeneration.Enabled = true;
-
-            GameData gd = new GameData();
-            gd.Name = name;
-
-            gameDatas.Add(gd);
-
             if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length > 1)
             {
               nameValidated = true;
@@ -49,6 +55,13 @@ namespace GOL_2019
 
             if (nameValidated)
             {
+
+              // Can't iterate without a GameLogic instance
+              btn_NextGeneration.Enabled = true;
+
+              currentGame = new GameData();
+              currentGame.Name = name;
+
               gl = new GameLogic(name, 8, 16);
               gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
@@ -59,10 +72,6 @@ namespace GOL_2019
             {
               MessageBox.Show("The name must be 2 characters and can only consist of letters and numbers.");
             }
-
-            lbx_SavedGames.Items.Clear();
-            foreach(GameData data in gameDatas)
-            lbx_SavedGames.Items.Add(data.Name);
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
@@ -71,6 +80,14 @@ namespace GOL_2019
             gl.Iterate();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
+        }
+        
+        // Needs to be called whenever a change was made to List<GameData> gameDatas
+        // or the changes will not be reflected in the listbox.
+        private void UpdateListBoxSource()
+        {
+          lbx_SavedGames.DataSource = null;
+          lbx_SavedGames.DataSource = bindingSource;
         }
 
         private void TestButton_Click(object sender, EventArgs e)
@@ -88,7 +105,9 @@ namespace GOL_2019
         {
             try
             {
-                SaveGame.Save(tb_NameOfGame.Text, gl.Generations);
+              gameDatas.Add(currentGame);
+              SaveGame.Save(tb_NameOfGame.Text, gl.Generations);
+              UpdateListBoxSource();
             }
             catch (Exception ex)
             {
