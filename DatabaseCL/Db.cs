@@ -18,11 +18,11 @@ namespace DatabaseCL
     }
     class DatabaseContext : DbContext
     {
-        static string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        
         public DatabaseContext() :
             base(new SQLiteConnection()
             {
-                ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = @"D:\VS Projects\GOL_2019\DatabaseCL\GOL db.db" }.ConnectionString
+                ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = AppDomain.CurrentDomain.BaseDirectory + @"GOL db.db" }.ConnectionString
             }, true)
         {
 
