@@ -20,6 +20,7 @@ namespace GOL_2019
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
             gameDatas = new List<GameData>();
+            
         }
 
         private void GameGrid_SelectionChanged(object sender, EventArgs e)
@@ -88,7 +89,7 @@ namespace GOL_2019
         {
             try
             {
-                SaveGame.Save(tb_NameOfGame.Text, gl.Generations);
+                SaveGame.SaveAll(gameDatas);
             }
             catch (Exception ex)
             {
