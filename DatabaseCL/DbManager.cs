@@ -42,5 +42,14 @@ namespace DatabaseCL
             context.SaveChanges();
         }
 
+        public static void Delete(int id)
+        {
+            DatabaseContext context = new DatabaseContext();
+
+            var idToRemove = context.GOL.Where(x => x.GOL_Id == id).FirstOrDefault();
+
+            context.GOL.Remove(idToRemove);
+        }
+
     }
 }
