@@ -20,5 +20,15 @@ namespace DatabaseCL
                 DbContext.SaveChanges();
             }
         }
+
+        public void LoadFromDb()
+        {
+
+        }
+
+        public void SaveToDb()
+        {
+
+        }
     }
 }
