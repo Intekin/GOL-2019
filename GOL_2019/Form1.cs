@@ -38,7 +38,7 @@ namespace GOL_2019
             btn_NextGeneration.Enabled = true;
 
             GameData gd = new GameData();
-            gd.Name = name
+            gd.Name = name;
 
             gameDatas.Add(gd);
 

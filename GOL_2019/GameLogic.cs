@@ -81,7 +81,7 @@ namespace GOL_2019
     public void Iterate()
     {
       int cellNeighbours;
-      Generations.Add(GameGrid);  // Save current generation before overwriting GameGrid with the new.
+      
 
       for (int y = 0; y < GridSize; y++)
         for(int x = 0; x < GridSize; x++)
@@ -104,6 +104,7 @@ namespace GOL_2019
           }
         }
 
+      Generations.Add(GameGrid);  // Save current generation before the next iteration
       // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
       //PrintToConsole(false);
     }
