@@ -15,7 +15,7 @@ namespace GOL_2019
             List<GOL> gdata = new List<GOL>();
             List<int[,]> genList = new List<int[,]>();
 
-            gdata = Class1.LoadFromDb();
+            gdata = DbManager.LoadFromDb();
 
             foreach (GOL data in gdata)
             {

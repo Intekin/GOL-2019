@@ -25,7 +25,7 @@ namespace GOL_2019
             try
             {
                 if (temp == "") temp = "Error";
-                Class1.SaveToDb(gameName, temp);
+                DbManager.SaveToDb(gameName, temp);
             }
             catch (Exception ex)
             {

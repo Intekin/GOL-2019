@@ -22,5 +22,9 @@ namespace GOL_2019
             get { return generations; }
             set { generations = value; }
         }
+        
+        // List<GameData> for the Listbox will now by default just show the name
+        public override string ToString () { return Name; }
+
     }
 }

@@ -40,7 +40,7 @@
       this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.GameGrid = new System.Windows.Forms.DataGridView();
       this.btn_NextGeneration = new System.Windows.Forms.Button();
-      this.btn_EndGame = new System.Windows.Forms.Button();
+      this.btn_SaveGame = new System.Windows.Forms.Button();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).BeginInit();
@@ -178,23 +178,23 @@
       this.btn_NextGeneration.UseVisualStyleBackColor = true;
       this.btn_NextGeneration.Click += new System.EventHandler(this.btn_NextGeneration_Click);
       // 
-      // btn_EndGame
+      // btn_SaveGame
       // 
-      this.btn_EndGame.Location = new System.Drawing.Point(428, 334);
-      this.btn_EndGame.Margin = new System.Windows.Forms.Padding(2);
-      this.btn_EndGame.Name = "btn_EndGame";
-      this.btn_EndGame.Size = new System.Drawing.Size(151, 22);
-      this.btn_EndGame.TabIndex = 4;
-      this.btn_EndGame.Text = "End Game";
-      this.btn_EndGame.UseVisualStyleBackColor = true;
-      this.btn_EndGame.Click += new System.EventHandler(this.btn_EndGame_Click);
+      this.btn_SaveGame.Location = new System.Drawing.Point(428, 334);
+      this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(2);
+      this.btn_SaveGame.Name = "btn_SaveGame";
+      this.btn_SaveGame.Size = new System.Drawing.Size(151, 22);
+      this.btn_SaveGame.TabIndex = 4;
+      this.btn_SaveGame.Text = "Save Game";
+      this.btn_SaveGame.UseVisualStyleBackColor = true;
+      this.btn_SaveGame.Click += new System.EventHandler(this.btn_SaveGame_Click);
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(600, 366);
-      this.Controls.Add(this.btn_EndGame);
+      this.Controls.Add(this.btn_SaveGame);
       this.Controls.Add(this.btn_NextGeneration);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
@@ -220,7 +220,7 @@
         private System.Windows.Forms.ListBox lbx_SavedGames;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btn_NextGeneration;
-        private System.Windows.Forms.Button btn_EndGame;
+        private System.Windows.Forms.Button btn_SaveGame;
         private System.Windows.Forms.DataGridView GameGrid;
         private System.Windows.Forms.Button TestButton;
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseCL
 {
-    public class Class1
+    public class DbManager
     {
         public static void TestDb()
         {

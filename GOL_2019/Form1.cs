@@ -76,7 +76,7 @@ namespace GOL_2019
         private void TestButton_Click(object sender, EventArgs e)
         {
             try {
-                Class1.TestDb();
+                DbManager.TestDb();
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace GOL_2019
             }
         }
 
-        private void btn_EndGame_Click(object sender, EventArgs e)
+        private void btn_SaveGame_Click(object sender, EventArgs e)
         {
             try
             {
@@ -95,7 +95,6 @@ namespace GOL_2019
                 MessageBox.Show(ex.ToString());
             }
 
-            //Application.Exit();
         }
 
         private void btn_Load_Click(object sender, EventArgs e)
@@ -103,22 +102,21 @@ namespace GOL_2019
 
         }
 
-        private void btn_Delete_Click(object sender, EventArgs e)
-        {
-
-        }
     
         public void btn_Delete_Click(object sender, EventArgs e)
         {
+          // Kommenterade bara ut för att kunna kompilera och pusha.
+          /*
             GOL b = new GOL();
             var Id = b.GOL_Id;
 
-            Class1 a = new Class1();
+            DbManager a = new DbManager();
             var Load = a.LoadFromDb();
 
             List<GOL> DELETE = Load;
             lbx_SavedGames.DataSource = DELETE;
             DELETE.Remove((GOL)lbx_SavedGames.SelectedValue);
+          */
         }
 
         public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
