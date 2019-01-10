@@ -14,8 +14,8 @@ namespace DatabaseCL
             DatabaseContext context = new DatabaseContext();
             GOL g = new GOL()
             {
-                Name = "Meh",
-                DOA = "Fy"
+                Name = "Test",
+                DOA = "0101010101010101010101010101010101010101010101010101010101010101"
             };
             context.GOL.Add(g);
             context.SaveChanges();
