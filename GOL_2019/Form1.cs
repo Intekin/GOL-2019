@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using DatabaseCL;
@@ -55,6 +56,24 @@ namespace GOL_2019
         private void btn_EndGame_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+    
+        public void btn_Delete_Click(object sender, EventArgs e)
+        {
+            GOL b = new GOL();
+            var Id = b.GOL_Id;
+
+            Class1 a = new Class1();
+            var Load = a.LoadFromDb();
+
+            List<GOL> DELETE = Load;
+            lbx_SavedGames.DataSource = DELETE;
+            DELETE.Remove((GOL)lbx_SavedGames.SelectedValue);
+        }
+
+        public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
