@@ -17,6 +17,7 @@ namespace DatabaseCL
                 g.Name = "Game1";
                 g.DOA = "";
 
+                DbContext.GOL.Add(g);
                 DbContext.SaveChanges();
             }
         }
@@ -26,9 +27,17 @@ namespace DatabaseCL
 
         }
 
-        public void SaveToDb()
+        public void SaveToDb(string name, string generation)
         {
+            using (var DbContext = new Db())
+            {
+                GOL gol = new GOL();
+                gol.Name = name;
+                gol.DOA = generation;
 
+                DbContext.GOL.Add(gol);
+                DbContext.SaveChanges();
+            }
         }
     }
 }

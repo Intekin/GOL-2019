@@ -8,7 +8,7 @@ namespace DatabaseCL
     public partial class Db : DbContext
     {
         public Db()
-            : base(@"Data Source=C:\users\simon\Documents\GitHub\GOL-2019\DatabaseCL\Gol Db.db")
+            : base("name=Db")
         {
         }
 

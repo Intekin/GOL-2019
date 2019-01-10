@@ -16,7 +16,6 @@ namespace DatabaseCL
         public string DOA { get; set; }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long GOL_Id { get; set; }
     }
 }
