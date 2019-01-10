@@ -8,7 +8,7 @@ namespace DatabaseCL
 {
     public class Class1
     {
-        public void TestDb()
+        public static void TestDb()
         {
             DatabaseContext context = new DatabaseContext();
             GOL g = new GOL()
@@ -20,7 +20,7 @@ namespace DatabaseCL
             context.SaveChanges();
         }
 
-        public List<GOL> LoadFromDb()
+        public static List<GOL> LoadFromDb()
         {
             DatabaseContext context = new DatabaseContext();
 
@@ -29,17 +29,16 @@ namespace DatabaseCL
             return listGol;
         }
 
-        public void SaveToDb(string name, string generation)
+        public static void SaveToDb(string name, string generation)
         {
-            using (var DbContext = new Db())
+            DatabaseContext context = new DatabaseContext();
+            GOL g = new GOL()
             {
-                GOL gol = new GOL();
-                gol.Name = name;
-                gol.DOA = generation;
-
-                DbContext.GOL.Add(gol);
-                DbContext.SaveChanges();
-            }
+                Name = name,
+                DOA = generation
+            };
+            context.GOL.Add(g);
+            context.SaveChanges();
         }
     }
 }
