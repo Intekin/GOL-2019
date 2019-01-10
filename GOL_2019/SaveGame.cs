@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using DatabaseCL;
 
 namespace GOL_2019
 {
     class SaveGame
     {
-        public void Save(List<int[,]> gameToSave)
+        public static void Save(string gameName, List<int[,]> gameToSave)
         {
-            foreach(int[,] array in gameToSave){
-                string temp ="";
+            string temp = "";
+            foreach (int[,] array in gameToSave){
                 for(int y= 0; y < 8; y++)
                     for(int x = 0; x < 8; x++)
                     {
@@ -19,7 +21,16 @@ namespace GOL_2019
                     }
                 temp += ",";
             }
-            //Send to Database_CL
+
+            try
+            {
+                if (temp == "") temp = "Error";
+                Class1.SaveToDb(gameName, temp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
