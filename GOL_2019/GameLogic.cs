@@ -9,16 +9,18 @@ namespace GOL_2019
 {
   class GameLogic
   {
-    public int[,] GameGrid;           // Current state of the game or "generation".
+    public string GameName { get; private set; }
+    public int[,] GameGrid { get; private set; }           // Current state of the game or "generation".
     private int GridSize;             // Height & width of the square game grid. Ex; 8 = 8*8 grid with 64 cells.
-    public int InitialCells;
-    public int PopulatedCells;
+    private int InitialCells;
+    public int PopulatedCells { get; private set; }
 
     public List<int[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
     private Random random;
 
-    public GameLogic(int gridSize = 8, int initialCells = 10)
+    public GameLogic(string gameName, int gridSize = 8, int initialCells = 10)
     {
+      GameName = gameName;
       GridSize = gridSize;
       Generations = new List<int[,]>();
       InitialCells = initialCells;
