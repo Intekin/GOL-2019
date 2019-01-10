@@ -20,9 +20,13 @@ namespace DatabaseCL
             context.SaveChanges();
         }
 
-        public void LoadFromDb()
+        public List<GOL> LoadFromDb()
         {
+            DatabaseContext context = new DatabaseContext();
 
+            var listGol = context.GOL.ToList();
+
+            return listGol;
         }
 
         public void SaveToDb(string name, string generation)
