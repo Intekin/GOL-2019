@@ -74,6 +74,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameData.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="LoadGame.cs" />
