@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace GOL_2019
 {
     class SaveGame
     {
-        public static void SaveAll(List<GameData> gameDatas)
+        public static void SaveAll(BindingList<GameData> gameDatas)
         {
             foreach (GameData data in gameDatas)
             {

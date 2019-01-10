@@ -1,6 +1,7 @@
 ﻿using DatabaseCL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace GOL_2019
 {
     class LoadGame
     {
-        public static List<GameData> Load()
+        public static BindingList<GameData> Load()
         {
 
             List<GOL> golData = new List<GOL>();
-            List<GameData> gameData = new List<GameData>();
+            BindingList<GameData> gameData = new BindingList<GameData>();
             GameData loadData = new GameData();
             golData = DbManager.LoadFromDb();
 

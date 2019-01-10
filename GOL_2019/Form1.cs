@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using DatabaseCL;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace GOL_2019
 {
@@ -12,8 +13,7 @@ namespace GOL_2019
         GameLogic gl;
         GameView gameView;
         GameData currentGame;
-        List<GameData> gameDatas;
-        BindingSource bindingSource;
+        BindingList<GameData> gameDatas;
 
 
         public Form1()
@@ -22,10 +22,14 @@ namespace GOL_2019
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
-            gameDatas = new List<GameData>();
-            
+
+            // Databinding
+            gameDatas = new BindingList<GameData>();
+            lbx_SavedGames.DataSource = gameDatas; 
         }
 
+
+        // Not doing anything at the moment
         private void GameGrid_SelectionChanged(object sender, EventArgs e)
         {
           GameGrid.ClearSelection();
@@ -69,16 +73,9 @@ namespace GOL_2019
             // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
             gl.Iterate();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
-
         }
         
-        // Needs to be called whenever a change was made to List<GameData> gameDatas
-        // or the changes will not be reflected in the listbox.
-        private void UpdateListBoxSource()
-        {
-          lbx_SavedGames.DataSource = null;
-          lbx_SavedGames.DataSource = bindingSource;
-        }
+
 
         private void TestButton_Click(object sender, EventArgs e)
         {
@@ -93,9 +90,11 @@ namespace GOL_2019
 
         private void btn_SaveGame_Click(object sender, EventArgs e)
         {
+            // Add current games GameData object to our list on a successfull save.
             try
             {
                 SaveGame.SaveAll(gameDatas);
+                gameDatas.Add(currentGame); // Add saved game to bound list.
             }
             catch (Exception ex)
             {
