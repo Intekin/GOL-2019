@@ -17,7 +17,7 @@ namespace GOL_2019
     public List<int[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
     private Random random;
 
-    public GameLogic(int gridSize = 8, int initialCells = 10)
+    public GameLogic(int gridSize = 8, int initialCells = 16)
     {
       GridSize = gridSize;
       Generations = new List<int[,]>();

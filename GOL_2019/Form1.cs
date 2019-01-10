@@ -43,7 +43,7 @@ namespace GOL_2019
             // Can't iterate without a GameLogic instance
             btn_NextGeneration.Enabled = true;
 
-            gl = new GameLogic(8, 16);
+            gl = new GameLogic();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
             currentGame = new GameData();
@@ -107,6 +107,10 @@ namespace GOL_2019
         {
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
             gameView.UpdateGameView(gd.Generations.Last(), GameGrid);
+ 
+            // Can't iterate without a GameLogic instance
+            gl = new GameLogic();
+            btn_NextGeneration.Enabled = true;
         }
 
 
