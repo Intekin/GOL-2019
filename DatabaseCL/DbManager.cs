@@ -30,7 +30,7 @@ namespace DatabaseCL
             return listGol;
         }
 
-        public static void SaveToDb(string name, string generation)
+        public static void SaveToDb(int id, string name, string generation)
         {
             DatabaseContext context = new DatabaseContext();
             GOL g = new GOL()
