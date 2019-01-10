@@ -23,17 +23,7 @@ namespace GOL_2019
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
             gameDatas = new List<GameData>();
-
-            // Databinding
-            bindingSource = new BindingSource();
-            bindingSource.DataSource = gameDatas;
-            lbx_SavedGames.DataSource = bindingSource;
-            lbx_SavedGames.DataSourceChanged += DataSourceChanged;
-        }
-
-        private void DataSourceChanged(object sender, EventArgs e)
-        {
-          MessageBox.Show("DataSource changed!");
+            
         }
 
         private void GameGrid_SelectionChanged(object sender, EventArgs e)
@@ -105,9 +95,7 @@ namespace GOL_2019
         {
             try
             {
-              gameDatas.Add(currentGame);
-              SaveGame.Save(tb_NameOfGame.Text, gl.Generations);
-              UpdateListBoxSource();
+                SaveGame.SaveAll(gameDatas);
             }
             catch (Exception ex)
             {

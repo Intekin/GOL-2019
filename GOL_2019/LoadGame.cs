@@ -9,23 +9,37 @@ namespace GOL_2019
 {
     class LoadGame
     {
-        public List<int[,]> Load()
+        public static List<GameData> Load()
         {
 
-            List<GOL> gdata = new List<GOL>();
-            List<int[,]> genList = new List<int[,]>();
+            List<GOL> golData = new List<GOL>();
+            List<GameData> gameData = new List<GameData>();
+            GameData loadData = new GameData();
+            golData = DbManager.LoadFromDb();
 
-            gdata = DbManager.LoadFromDb();
-
-            foreach (GOL data in gdata)
+            foreach (GOL data in golData)
             {
+                string[] tempGenerations = data.DOA.Split(',');
 
+                foreach (string s in tempGenerations) {
+
+                    int counter = 0;
+                    char[] temp = s.ToCharArray();
+                    int[,] tempArray = new int[8, 8];
+                    for (int y = 0; y < 8; y++)
+                        for (int x = 0; x < 8; x++)
+                        {
+                            tempArray[x, y] = (int)temp[counter];
+                        }
+                    loadData.Generations.Add(tempArray);
+                }
+
+                loadData.Name = data.Name;
+                loadData.ID = (int)data.GOL_Id;
+
+                gameData.Add(loadData);
             }
-            string[] temp = gdata[0].DOA.Split(',');
-
-
-
-            return genList;
+            return gameData;
         }
     }
 }
