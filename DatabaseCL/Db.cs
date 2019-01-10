@@ -16,6 +16,7 @@ namespace DatabaseCL
         {
         }
     }
+
     class DatabaseContext : DbContext
     {
         
