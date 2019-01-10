@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DatabaseCL;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
+using System.Linq;
 
 namespace GOL_2019
 {
@@ -34,39 +35,14 @@ namespace GOL_2019
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
-            // Validate name to avoid SQL errors whilst saving
-            string name = tb_NameOfGame.Text;
-            bool nameValidated = false;
+            // Can't iterate without a GameLogic instance
+            btn_NextGeneration.Enabled = true;
 
+            gl = new GameLogic(8, 16);
+            gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
-
-            
-
-            if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length > 1)
-            {
-                nameValidated = true;
-            }
-
-            if (nameValidated)
-            {
-                // Can't iterate without a GameLogic instance
-                btn_NextGeneration.Enabled = true;
-
-                gl = new GameLogic(name, 8, 16);
-                gameView.UpdateGameView(gl.GameGrid, GameGrid);
-
-                currentGame = new GameData();
-                currentGame.Name = name;
-                currentGame.Generations = gl.Generations;
-                //gameDatas.Add(gd);
-
-                // Can't iterate without a GameLogic instance
-                btn_NextGeneration.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("The name must be 2 characters and can only consist of letters and numbers.");
-            }
+            currentGame = new GameData();
+            currentGame.Generations = gl.Generations;
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
@@ -94,9 +70,27 @@ namespace GOL_2019
         {
             try
             {
-                gameDatas.Add(currentGame);
-                SaveGame.SaveAll(gameDatas);
-            }
+                // Validate name to avoid SQL errors whilst saving
+                string name = tb_NameOfGame.Text;
+                bool nameValidated = false;
+                if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length >= 2) nameValidated = true;
+
+                if (nameValidated)
+                {
+                    currentGame.Name = name;
+                    if (gameDatas.Any(x => x.Name == currentGame.Name))
+                    {
+                        MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
+                        return;
+                    }
+                    gameDatas.Add(currentGame);
+                    SaveGame.SaveAll(gameDatas);
+                }
+                else
+                {
+                    MessageBox.Show("The name must be 2 characters and can only consist of letters and numbers.");
+                }
+              }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
