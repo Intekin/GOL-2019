@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 using System.Windows.Forms;
 using DatabaseCL;
 
@@ -36,6 +36,7 @@ namespace GOL_2019
 
         private void TestButton_Click(object sender, EventArgs e)
         {
+            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             try {
                 Class1 c = new Class1();
                 c.TestDb();
@@ -44,6 +45,7 @@ namespace GOL_2019
             {
                 MessageBox.Show(ex.ToString());
             }
+            MessageBox.Show(projectDirectory);
 
         }
 

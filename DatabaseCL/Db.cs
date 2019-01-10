@@ -5,6 +5,7 @@ namespace DatabaseCL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Data.SQLite;
+    using System.IO;
 
     public partial class Db : DbContext
     {
@@ -17,12 +18,14 @@ namespace DatabaseCL
     }
     class DatabaseContext : DbContext
     {
+        static string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         public DatabaseContext() :
             base(new SQLiteConnection()
             {
-                ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = @"D:\VS Projects\GOL_2019\DatabaseCL\Gol Db.db" }.ConnectionString
+                ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = @"D:\VS Projects\GOL_2019\DatabaseCL\GOL db.db" }.ConnectionString
             }, true)
         {
+
         }
         public DbSet<GOL> GOL { get; set; }
     }
