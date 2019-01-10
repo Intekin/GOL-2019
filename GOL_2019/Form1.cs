@@ -22,9 +22,14 @@ namespace GOL_2019
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
-            
+
+
+
             // Databinding
             gameDatas = new BindingList<GameData>();
+            lbx_SavedGames.DataSource = gameDatas;
+
+            gameDatas = LoadGame.LoadAll();
             lbx_SavedGames.DataSource = gameDatas;
         }
 
@@ -100,7 +105,8 @@ namespace GOL_2019
 
         private void btn_Load_Click(object sender, EventArgs e)
         {
-            gameDatas = LoadGame.Load();
+            GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+            gameView.UpdateGameView(gd.Generations.Last(), GameGrid);
         }
 
 
