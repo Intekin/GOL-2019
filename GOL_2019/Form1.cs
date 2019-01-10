@@ -36,8 +36,15 @@ namespace GOL_2019
 
         private void TestButton_Click(object sender, EventArgs e)
         {
-            Class1 c = new Class1();
-            c.TestDb();
+            try {
+                Class1 c = new Class1();
+                c.TestDb();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void btn_EndGame_Click(object sender, EventArgs e)
