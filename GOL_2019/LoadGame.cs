@@ -15,12 +15,12 @@ namespace GOL_2019
 
             List<GOL> golData = new List<GOL>();
             BindingList<GameData> gameData = new BindingList<GameData>();
-            GameData loadData = new GameData();
 
             golData = DbManager.LoadFromDb();
 
             foreach (GOL data in golData)
             {
+                GameData loadData = new GameData();
                 string[] tempGenerations = data.DOA.Split(',');
                 List<int[,]> tempList = new List<int[,]>();
 
