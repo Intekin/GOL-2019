@@ -10,16 +10,14 @@ namespace DatabaseCL
     {
         public void TestDb()
         {
-            using (var DbContext = new Db())
+            DatabaseContext context = new DatabaseContext();
+            GOL g = new GOL()
             {
-                GOL g = new GOL();
-                g.GOL_Id = 1;
-                g.Name = "Game1";
-                g.DOA = "";
-
-                DbContext.GOL.Add(g);
-                DbContext.SaveChanges();
-            }
+                Name = "Meh",
+                DOA = "Fy"
+            };
+            context.GOL.Add(g);
+            context.SaveChanges();
         }
 
         public void LoadFromDb()
