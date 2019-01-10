@@ -94,7 +94,7 @@ namespace GOL_2019
           }
 
           // Empty cell with 3; now a not-so-empty cell.
-          if (GameGrid[x, y] > 0 && cellNeighbours == 3)
+          if (GameGrid[x, y] == 0 && cellNeighbours == 3)
           {
             GameGrid[x, y] = 1;
             PopulatedCells++;
