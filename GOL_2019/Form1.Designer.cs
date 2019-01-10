@@ -79,6 +79,7 @@
       // 
       this.tb_NameOfGame.Location = new System.Drawing.Point(7, 291);
       this.tb_NameOfGame.Margin = new System.Windows.Forms.Padding(2);
+      this.tb_NameOfGame.MaxLength = 18;
       this.tb_NameOfGame.Name = "tb_NameOfGame";
       this.tb_NameOfGame.Size = new System.Drawing.Size(90, 20);
       this.tb_NameOfGame.TabIndex = 3;
