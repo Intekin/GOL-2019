@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using DatabaseCL;
 using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace GOL_2019
 {
@@ -11,7 +12,8 @@ namespace GOL_2019
     {
         GameLogic gl;
         GameView gameView;
-        List<GameData> gameDatas;
+        GameData currentGame;
+        BindingList<GameData> gameDatas;
 
         public Form1()
         {
@@ -19,8 +21,10 @@ namespace GOL_2019
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
             GameGrid.ClearSelection();
-            gameDatas = new List<GameData>();
-
+            
+            // Databinding
+            gameDatas = new BindingList<GameData>();
+            lbx_SavedGames.DataSource = gameDatas;
         }
 
         private void GameGrid_SelectionChanged(object sender, EventArgs e)
@@ -35,13 +39,8 @@ namespace GOL_2019
             bool nameValidated = false;
 
 
-            // Can't iterate without a GameLogic instance
-            btn_NextGeneration.Enabled = true;
 
-            GameData gd = new GameData();
             
-
-
 
             if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length > 1)
             {
@@ -50,12 +49,16 @@ namespace GOL_2019
 
             if (nameValidated)
             {
+                // Can't iterate without a GameLogic instance
+                btn_NextGeneration.Enabled = true;
+
                 gl = new GameLogic(name, 8, 16);
                 gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
-                gd.Name = name;
-                gd.Generations = gl.Generations;
-                gameDatas.Add(gd);
+                currentGame = new GameData();
+                currentGame.Name = name;
+                currentGame.Generations = gl.Generations;
+                //gameDatas.Add(gd);
 
                 // Can't iterate without a GameLogic instance
                 btn_NextGeneration.Enabled = true;
@@ -64,10 +67,6 @@ namespace GOL_2019
             {
                 MessageBox.Show("The name must be 2 characters and can only consist of letters and numbers.");
             }
-
-            lbx_SavedGames.Items.Clear();
-            foreach (GameData data in gameDatas)
-            lbx_SavedGames.Items.Add(data.Name);
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
@@ -95,7 +94,7 @@ namespace GOL_2019
         {
             try
             {
-                gameDatas[lbx_SavedGames.SelectedIndex].Generations = gl.Generations;
+                gameDatas.Add(currentGame);
                 SaveGame.SaveAll(gameDatas);
             }
             catch (Exception ex)
