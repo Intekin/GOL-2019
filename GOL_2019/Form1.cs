@@ -15,6 +15,12 @@ namespace GOL_2019
             InitializeComponent();
             gameView = new GameView();    
             gameView.InitGameView(GameGrid);
+            GameGrid.ClearSelection();
+        }
+
+        private void GameGrid_SelectionChanged(object sender, EventArgs e)
+        {
+          GameGrid.ClearSelection();
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -22,8 +28,8 @@ namespace GOL_2019
             gl = new GameLogic();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
-            // Load gameLogic.GameGrid into GameGrid (DataGridView control)
-
+            // Can't iterate without a GameLogic instance
+            btn_NextGeneration.Enabled = true;
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
