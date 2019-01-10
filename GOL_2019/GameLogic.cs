@@ -39,6 +39,7 @@ namespace GOL_2019
         }
       } while (PopulatedCells < InitialCells);
 
+      Generations.Add(GameGrid);
       // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
       //PrintToConsole();
     }
