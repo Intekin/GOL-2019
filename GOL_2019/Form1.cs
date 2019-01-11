@@ -115,9 +115,12 @@ namespace GOL_2019
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
-            gameDatas.Remove(gd);
 
-            DbManager.Delete(gd.ID);
+            if (gd != null)
+            {
+                gameDatas.Remove(gd);
+                DbManager.Delete(gd.ID);
+            }
         }
     }
 }
