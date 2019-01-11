@@ -44,31 +44,31 @@ namespace GOL_2019
 
 
     // Check for amount of neighbours
-    private int CellHasNeighbours(int x, int y)
+    private int CellHasNeighbours(int[,] grid, int x, int y)
     {
       int neighboursCount = 0;
 
       // Top neighbours; we don't check these for cells on the top row.
       if (y != 0)
       {
-        if (x != 0 && GameGrid[x - 1, y - 1] > 0) neighboursCount++;              // Top-left
-        if (GameGrid[x, y - 1] > 0) neighboursCount++;                            // Top-center
-        if (x != GridSize - 1 && GameGrid[x + 1, y - 1] > 0) neighboursCount++;   // Top-right
+        if (x != 0 && grid[x - 1, y - 1] > 0) neighboursCount++;              // Top-left
+        if (grid[x, y - 1] > 0) neighboursCount++;                            // Top-center
+        if (x != GridSize - 1 && grid[x + 1, y - 1] > 0) neighboursCount++;   // Top-right
       }
 
       // Left-right neighbours; we don't check for the cells on the very first or last index in a row.
       if (x != 0 && x != GridSize - 1)
       {
-        if (GameGrid[x - 1, y] > 0) neighboursCount++; // Left
-        if (GameGrid[x + 1, y] > 0) neighboursCount++; // Right
+        if (grid[x - 1, y] > 0) neighboursCount++; // Left
+        if (grid[x + 1, y] > 0) neighboursCount++; // Right
       }
 
       // Bottom neighbours; not checking for cells on the last row.
       if (y != GridSize - 1)
       {
-        if (x != 0 && GameGrid[x - 1, y + 1] > 0) neighboursCount++;              // Bottom-left
-        if (GameGrid[x, y + 1] > 0) neighboursCount++;                            // Bottom-center
-        if (x != GridSize - 1 && GameGrid[x + 1, y + 1] > 0) neighboursCount++;   // Bottom-right
+        if (x != 0 && grid[x - 1, y + 1] > 0) neighboursCount++;              // Bottom-left
+        if (grid[x, y + 1] > 0) neighboursCount++;                            // Bottom-center
+        if (x != GridSize - 1 && grid[x + 1, y + 1] > 0) neighboursCount++;   // Bottom-right
       }
 
       return neighboursCount;
@@ -79,30 +79,31 @@ namespace GOL_2019
     public void Iterate()
     {
       int cellNeighbours;
-      
+      int[,] newGeneration = (int[,])GameGrid.Clone();
 
       for (int y = 0; y < GridSize; y++)
         for(int x = 0; x < GridSize; x++)
         {
           // Check the (up to) 8 immediately surrounding cells
-          cellNeighbours = CellHasNeighbours(x, y);
+          cellNeighbours = CellHasNeighbours(newGeneration, x, y);
 
           // Less than 2; die of loneliness, greater than 3; die of overpopulation.
           if (cellNeighbours < 2 || cellNeighbours > 3)
           {
-            GameGrid[x, y] = 0;
+            newGeneration[x, y] = 0;
             PopulatedCells--;
           }
 
           // Empty cell with 3; now a not-so-empty cell.
-          if (GameGrid[x, y] == 0 && cellNeighbours == 3)
+          if (newGeneration[x, y] == 0 && cellNeighbours == 3)
           {
-            GameGrid[x, y] = 1;
+            newGeneration[x, y] = 1;
             PopulatedCells++;
           }
         }
 
-      Generations.Add(GameGrid);  // Save current generation before the next iteration
+      GameGrid = newGeneration;
+      Generations.Add(newGeneration);  // Save current generation before the next iteration
       // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
       //PrintToConsole(false);
     }
