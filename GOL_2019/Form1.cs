@@ -114,25 +114,17 @@ namespace GOL_2019
         }
 
 
-        public void btn_Delete_Click(object sender, EventArgs e)
-        {
-            // Kommenterade bara ut för att kunna kompilera och pusha.
-            /*
-              GOL b = new GOL();
-              var Id = b.GOL_Id;
-
-              DbManager a = new DbManager();
-              var Load = a.LoadFromDb();
-
-              List<GOL> DELETE = Load;
-              lbx_SavedGames.DataSource = DELETE;
-              DELETE.Remove((GOL)lbx_SavedGames.SelectedValue);
-            */
-        }
-
         public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+            gameDatas.Remove(gd);
+
+            DbManager.Delete(gd.ID);
         }
     }
 }

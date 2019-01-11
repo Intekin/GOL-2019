@@ -49,6 +49,7 @@ namespace DatabaseCL
             var idToRemove = context.GOL.Where(x => x.GOL_Id == id).FirstOrDefault();
 
             context.GOL.Remove(idToRemove);
+            context.SaveChanges();
         }
 
     }
