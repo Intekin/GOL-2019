@@ -123,7 +123,7 @@ namespace GOL_2019
               }
             });
 
-            timer.Interval = 1000;
+            timer.Interval = 800;
             timer.Enabled = true;
 
             // Can't iterate without a GameLogic instance
