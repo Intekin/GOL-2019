@@ -89,6 +89,8 @@ namespace GOL_2019
                         MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
                         return;
                     }
+
+                    // This needs to change
                     gameDatas.Add(currentGame);
                     SaveGame.SaveAll(gameDatas);
                 }
