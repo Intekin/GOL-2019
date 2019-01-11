@@ -15,21 +15,23 @@ namespace GOL_2019
         {
             foreach (GameData data in gameDatas)
             {
-                string temp = "";
+                string saveString = "";
+
                 foreach (int[,] array in data.Generations)
                 {
+                    string temp = "";
                     for (int y = 0; y < 8; y++)
                         for (int x = 0; x < 8; x++)
                         {
                             temp += array[x, y];
                         }
-                    temp += ",";
+                    saveString += temp + ",";
                 }
 
                 try
                 {
-                    if (temp == "") temp = "Error";
-                    DbManager.SaveToDb(data.ID, data.Name, temp);
+                    if (saveString == "") saveString = "Error";
+                    DbManager.SaveToDb(data.ID, data.Name, saveString);
                 }
                 catch (Exception ex)
                 {
