@@ -56,20 +56,21 @@
             this.groupBox1.Controls.Add(this.btn_Load);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lbx_SavedGames);
-            this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(202, 346);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(269, 426);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
             // TestButton
             // 
-            this.TestButton.Location = new System.Drawing.Point(111, 291);
+            this.TestButton.Location = new System.Drawing.Point(148, 358);
+            this.TestButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TestButton.Name = "TestButton";
-            this.TestButton.Size = new System.Drawing.Size(75, 23);
+            this.TestButton.Size = new System.Drawing.Size(100, 28);
             this.TestButton.TabIndex = 8;
             this.TestButton.Text = "Test";
             this.TestButton.UseVisualStyleBackColor = true;
@@ -77,29 +78,28 @@
             // 
             // tb_NameOfGame
             // 
-            this.tb_NameOfGame.Location = new System.Drawing.Point(7, 291);
-            this.tb_NameOfGame.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_NameOfGame.Location = new System.Drawing.Point(9, 358);
+            this.tb_NameOfGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_NameOfGame.MaxLength = 18;
             this.tb_NameOfGame.Name = "tb_NameOfGame";
-            this.tb_NameOfGame.Size = new System.Drawing.Size(90, 20);
+            this.tb_NameOfGame.Size = new System.Drawing.Size(119, 22);
             this.tb_NameOfGame.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 275);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(5, 338);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(45, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "Name";
             // 
             // btn_StartNewGame
             // 
-            this.btn_StartNewGame.Location = new System.Drawing.Point(7, 314);
-            this.btn_StartNewGame.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_StartNewGame.Location = new System.Drawing.Point(9, 386);
+            this.btn_StartNewGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_StartNewGame.Name = "btn_StartNewGame";
-            this.btn_StartNewGame.Size = new System.Drawing.Size(89, 28);
+            this.btn_StartNewGame.Size = new System.Drawing.Size(119, 34);
             this.btn_StartNewGame.TabIndex = 6;
             this.btn_StartNewGame.Text = "Start new game";
             this.btn_StartNewGame.UseVisualStyleBackColor = true;
@@ -107,20 +107,21 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(100, 227);
-            this.btn_Delete.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Delete.Location = new System.Drawing.Point(133, 279);
+            this.btn_Delete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(84, 19);
+            this.btn_Delete.Size = new System.Drawing.Size(112, 23);
             this.btn_Delete.TabIndex = 5;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
             // btn_Load
             // 
-            this.btn_Load.Location = new System.Drawing.Point(7, 227);
-            this.btn_Load.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Load.Location = new System.Drawing.Point(9, 279);
+            this.btn_Load.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Load.Name = "btn_Load";
-            this.btn_Load.Size = new System.Drawing.Size(89, 19);
+            this.btn_Load.Size = new System.Drawing.Size(119, 23);
             this.btn_Load.TabIndex = 4;
             this.btn_Load.Text = "Load";
             this.btn_Load.UseVisualStyleBackColor = true;
@@ -129,30 +130,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 32);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(5, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(97, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Saved Games";
             // 
             // lbx_SavedGames
             // 
             this.lbx_SavedGames.FormattingEnabled = true;
-            this.lbx_SavedGames.Location = new System.Drawing.Point(7, 50);
-            this.lbx_SavedGames.Margin = new System.Windows.Forms.Padding(2);
+            this.lbx_SavedGames.ItemHeight = 16;
+            this.lbx_SavedGames.Location = new System.Drawing.Point(9, 62);
+            this.lbx_SavedGames.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbx_SavedGames.Name = "lbx_SavedGames";
-            this.lbx_SavedGames.Size = new System.Drawing.Size(179, 173);
+            this.lbx_SavedGames.Size = new System.Drawing.Size(237, 212);
             this.lbx_SavedGames.TabIndex = 2;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.GameGrid);
-            this.groupBox2.Location = new System.Drawing.Point(280, 13);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(373, 16);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(290, 311);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(387, 383);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Of Life";
@@ -160,20 +161,20 @@
             // GameGrid
             // 
             this.GameGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GameGrid.Location = new System.Drawing.Point(5, 18);
-            this.GameGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.GameGrid.Location = new System.Drawing.Point(7, 22);
+            this.GameGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GameGrid.Name = "GameGrid";
             this.GameGrid.RowTemplate.Height = 24;
-            this.GameGrid.Size = new System.Drawing.Size(285, 285);
+            this.GameGrid.Size = new System.Drawing.Size(380, 351);
             this.GameGrid.TabIndex = 0;
             // 
             // btn_NextGeneration
             // 
             this.btn_NextGeneration.Enabled = false;
-            this.btn_NextGeneration.Location = new System.Drawing.Point(269, 334);
-            this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_NextGeneration.Location = new System.Drawing.Point(359, 411);
+            this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_NextGeneration.Name = "btn_NextGeneration";
-            this.btn_NextGeneration.Size = new System.Drawing.Size(154, 22);
+            this.btn_NextGeneration.Size = new System.Drawing.Size(205, 27);
             this.btn_NextGeneration.TabIndex = 3;
             this.btn_NextGeneration.Text = "Next Generation";
             this.btn_NextGeneration.UseVisualStyleBackColor = true;
@@ -181,10 +182,10 @@
             // 
             // btn_SaveGame
             // 
-            this.btn_SaveGame.Location = new System.Drawing.Point(428, 334);
-            this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_SaveGame.Location = new System.Drawing.Point(571, 411);
+            this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_SaveGame.Name = "btn_SaveGame";
-            this.btn_SaveGame.Size = new System.Drawing.Size(151, 22);
+            this.btn_SaveGame.Size = new System.Drawing.Size(201, 27);
             this.btn_SaveGame.TabIndex = 4;
             this.btn_SaveGame.Text = "Save Game";
             this.btn_SaveGame.UseVisualStyleBackColor = true;
@@ -192,14 +193,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_SaveGame);
             this.Controls.Add(this.btn_NextGeneration);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "GOL";
             this.groupBox1.ResumeLayout(false);
