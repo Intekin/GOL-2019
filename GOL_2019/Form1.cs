@@ -21,21 +21,13 @@ namespace GOL_2019
             InitializeComponent();
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
-            GameGrid.ClearSelection();
-
-
-
+     
             // Databinding
             gameDatas = new BindingList<GameData>();
             lbx_SavedGames.DataSource = gameDatas;
 
             gameDatas = LoadGame.LoadAll();
             lbx_SavedGames.DataSource = gameDatas;
-        }
-
-        private void GameGrid_SelectionChanged(object sender, EventArgs e)
-        {
-            GameGrid.ClearSelection();
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -45,6 +37,7 @@ namespace GOL_2019
 
             gl = new GameLogic();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
+            GameGrid.CurrentCell = null; //Testade runt, funkar bara efter man har kört Form1, denna rad avmarkerar den ensamma lilla cellen. 
 
             currentGame = new GameData();
             currentGame.Generations = gl.Generations;
