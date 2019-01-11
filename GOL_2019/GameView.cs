@@ -30,7 +30,8 @@ namespace GOL_2019
             GameGrid.AutoGenerateColumns = false;
             GameGrid.RowTemplate.Height = rowHeight; //Can only set the height before the creation of the grid.
 
-            GameGrid.ClearSelection();
+
+            GameGrid.Enabled = false;
             GameGrid.RowHeadersVisible = false;
             GameGrid.ColumnHeadersVisible = false;
             for (int i = 1; i <= numOfColumns; i++)
@@ -38,10 +39,11 @@ namespace GOL_2019
                 GameGrid.Columns.Add("col" + i, "column " + i);
                 GameGrid.Columns[i - 1].Width = columnWidth; //Can only seth the width of columns during its creation
             }
-            for (int j = 0; j < numOfRows-1; j++) //minus one Row, since one row is aut created;
+            for (int j = 0; j < numOfRows; j++)
             {
                 GameGrid.Rows.Add();
             }
+            GameGrid.CurrentCell = null;
         }
         public void UpdateGameView(int[,] currentGeneration, DataGridView GameGrid)
         {

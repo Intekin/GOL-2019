@@ -41,9 +41,15 @@
             this.GameGrid = new System.Windows.Forms.DataGridView();
             this.btn_NextGeneration = new System.Windows.Forms.Button();
             this.btn_SaveGame = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.arkivToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -56,7 +62,7 @@
             this.groupBox1.Controls.Add(this.btn_Load);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lbx_SavedGames);
-            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Location = new System.Drawing.Point(11, 39);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -148,7 +154,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.GameGrid);
-            this.groupBox2.Location = new System.Drawing.Point(280, 13);
+            this.groupBox2.Location = new System.Drawing.Point(282, 42);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -159,18 +165,29 @@
             // 
             // GameGrid
             // 
-            this.GameGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GameGrid.Location = new System.Drawing.Point(5, 18);
+            this.GameGrid.AllowUserToAddRows = false;
+            this.GameGrid.AllowUserToDeleteRows = false;
+            this.GameGrid.AllowUserToResizeColumns = false;
+            this.GameGrid.AllowUserToResizeRows = false;
+            this.GameGrid.CausesValidation = false;
+            this.GameGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.GameGrid.Enabled = false;
+            this.GameGrid.Location = new System.Drawing.Point(5, 17);
             this.GameGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.GameGrid.MultiSelect = false;
             this.GameGrid.Name = "GameGrid";
+            this.GameGrid.ReadOnly = true;
+            this.GameGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.GameGrid.RowTemplate.Height = 24;
+            this.GameGrid.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.GameGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.GameGrid.Size = new System.Drawing.Size(285, 285);
             this.GameGrid.TabIndex = 0;
             // 
             // btn_NextGeneration
             // 
             this.btn_NextGeneration.Enabled = false;
-            this.btn_NextGeneration.Location = new System.Drawing.Point(269, 334);
+            this.btn_NextGeneration.Location = new System.Drawing.Point(271, 363);
             this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NextGeneration.Name = "btn_NextGeneration";
             this.btn_NextGeneration.Size = new System.Drawing.Size(154, 22);
@@ -181,7 +198,7 @@
             // 
             // btn_SaveGame
             // 
-            this.btn_SaveGame.Location = new System.Drawing.Point(428, 334);
+            this.btn_SaveGame.Location = new System.Drawing.Point(430, 363);
             this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(2);
             this.btn_SaveGame.Name = "btn_SaveGame";
             this.btn_SaveGame.Size = new System.Drawing.Size(151, 22);
@@ -190,15 +207,56 @@
             this.btn_SaveGame.UseVisualStyleBackColor = true;
             this.btn_SaveGame.Click += new System.EventHandler(this.btn_SaveGame_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.arkivToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(600, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // arkivToolStripMenuItem
+            // 
+            this.arkivToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.arkivToolStripMenuItem.Name = "arkivToolStripMenuItem";
+            this.arkivToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.arkivToolStripMenuItem.Text = "Arkiv";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(600, 396);
             this.Controls.Add(this.btn_SaveGame);
             this.Controls.Add(this.btn_NextGeneration);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.menuStrip1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "GOL";
@@ -206,7 +264,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -224,6 +285,11 @@
         private System.Windows.Forms.Button btn_SaveGame;
         private System.Windows.Forms.DataGridView GameGrid;
         private System.Windows.Forms.Button TestButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem arkivToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

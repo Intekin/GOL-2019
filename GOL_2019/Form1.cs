@@ -21,21 +21,14 @@ namespace GOL_2019
             InitializeComponent();
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
-            GameGrid.ClearSelection();
-
-
+            
 
             // Databinding
+            gameDatas = LoadGame.LoadAll();
             gameDatas = new BindingList<GameData>();
             lbx_SavedGames.DataSource = gameDatas;
 
-            gameDatas = LoadGame.LoadAll();
-            lbx_SavedGames.DataSource = gameDatas;
-        }
-
-        private void GameGrid_SelectionChanged(object sender, EventArgs e)
-        {
-            GameGrid.ClearSelection();
+            
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -45,9 +38,11 @@ namespace GOL_2019
 
             gl = new GameLogic();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
+            GameGrid.CurrentCell = null;
 
             currentGame = new GameData();
             currentGame.Generations = gl.Generations;
+            
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
@@ -131,6 +126,16 @@ namespace GOL_2019
         }
 
         public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
