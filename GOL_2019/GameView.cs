@@ -52,7 +52,6 @@ namespace GOL_2019
                         GameGrid[i, j].Style.BackColor = Color.Black;
                     else
                         GameGrid[i, j].Style.BackColor = Color.White;
-
                 }
         }
     }

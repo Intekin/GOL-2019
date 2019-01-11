@@ -78,6 +78,24 @@ namespace GOL_2019
     // Save current generation, calculate the next.
     public void Iterate()
     {
+      Console.Clear();
+      // Debug
+      for(int i = 0; i < Generations.Count; i++)
+      {
+        string temp = "";
+        foreach (int[,] array in Generations)
+        {
+          for (int y = 0; y < 8; y++)
+            for (int x = 0; x < 8; x++)
+            {
+              temp += array[x, y];
+            }
+          temp += ",";
+        }
+        Console.WriteLine($"Iterate: Gen {i}:\n{temp}");
+      }
+
+
       int cellNeighbours;
       
 

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C70B6E93-25EA-4FE2-BC1E-BBC75A7BF268}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>GOL_2019</RootNamespace>
     <AssemblyName>GOL_2019</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

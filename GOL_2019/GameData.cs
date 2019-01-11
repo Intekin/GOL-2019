@@ -30,8 +30,6 @@ namespace GOL_2019
             set { id = value; }
         }
 
-
-
         // List<GameData> for the Listbox will now by default just show the name
         public override string ToString () { return Name; }
 
