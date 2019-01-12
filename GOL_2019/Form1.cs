@@ -30,6 +30,11 @@ namespace GOL_2019
             gameDatas = new BindingList<GameData>();
             lbx_SavedGames.DataSource = gameDatas;
 
+            //Datasource
+            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
+            cb_GameMode.SelectedValue = settings.GameMode;
+        }
+
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
             // Can't iterate without a GameLogic instance

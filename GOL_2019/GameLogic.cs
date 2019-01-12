@@ -84,8 +84,7 @@ namespace GOL_2019
       int[,] newGeneration = (int[,])GameGrid.Clone();
 
         // Save current generation, calculate the next.
-        public void Iterate()
-        {
+        
           // Check the (up to) 8 immediately surrounding cells
           cellNeighbours = CellHasNeighbours(newGeneration, x, y);
 
