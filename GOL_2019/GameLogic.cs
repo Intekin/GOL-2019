@@ -10,27 +10,28 @@ namespace GOL_2019
     class GameLogic
     {
         public int[,] GameGrid { get; private set; }           // Current state of the game or "generation".
-        private int GridSize;             // Height & width of the square game grid. Ex; 8 = 8*8 grid with 64 cells.
+        private int GridSizeX, GridSizeY;             // Height & width of the square game grid. Ex; 8 = 8*8 grid with 64 cells.
         private int InitialCells;
         public int PopulatedCells { get; private set; }
 
         public List<int[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
         private Random random;
 
-        public GameLogic(int gridSize = 8, int initialCells = 16)
+        public GameLogic(int gridSizeX, int gridSizeY, int initialCells)
         {
-            GridSize = gridSize;
+            GridSizeX = gridSizeX;
+            GridSizeY = gridSizeY;
             Generations = new List<int[,]>();
             InitialCells = initialCells;
             PopulatedCells = 0;
-            GameGrid = new int[GridSize, GridSize];
+            GameGrid = new int[GridSizeX, GridSizeY];
 
             // Initial population
             random = new Random();
             do
             {
-                int x = random.Next(0, GridSize);
-                int y = random.Next(0, GridSize);
+                int x = random.Next(0, GridSizeX);
+                int y = random.Next(0, GridSizeY);
                 if (GameGrid[y, x] < 1)
                 {
                     GameGrid[y, x] = 1;
@@ -83,8 +84,8 @@ namespace GOL_2019
             int cellNeighbours;
             int[,] newGeneration = (int[,])GameGrid.Clone();
 
-            for (int y = 0; y < GridSize; y++)
-                for (int x = 0; x < GridSize; x++)
+            for (int y = 0; y < GridSizeY; y++)
+                for (int x = 0; x < GridSizeX; x++)
                 {
                     // Check the (up to) 8 immediately surrounding cells
                     cellNeighbours = CellHasNeighbours(newGeneration, x, y);
@@ -117,15 +118,15 @@ namespace GOL_2019
             // Unless we pass false, we clear the console before printing the current generation.
             if (clearConsole) Console.Clear();
 
-            Console.WriteLine($"----- Printing {GridSize}*{GridSize} grid ({Math.Pow(GridSize, 2)} cells). Generation: {Generations.Count()}, Cells: {PopulatedCells} -----");
+            Console.WriteLine($"----- Printing {GridSizeX}*{GridSizeY} grid ({(GridSizeX * GridSizeY )} cells). Generation: {Generations.Count()}, Cells: {PopulatedCells} -----");
             string row = "";
-            for (int y = 0; y < GridSize; y++)
+            for (int y = 0; y < GridSizeY; y++)
             {
                 Console.WriteLine("--------------------------------------------------------");
-                for (int x = 0; x < GridSize; x++)
+                for (int x = 0; x < GridSizeX; x++)
                 {
                     row += $" | {GameGrid[x, y]} |";
-                    if (x != GridSize) row += " ";
+                    if (x != GridSizeX) row += " ";
                 }
                 Console.WriteLine(row);
                 row = "";
