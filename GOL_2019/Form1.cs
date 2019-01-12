@@ -168,7 +168,6 @@ namespace GOL_2019
         private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             settings.GameMode = (GameSettings.GAMEMODE)cb_GameMode.SelectedIndex;
-            MessageBox.Show(settings.GameMode.ToString());
 
             if(settings.GameMode == GameSettings.GAMEMODE.Standard)
             {
@@ -200,6 +199,12 @@ namespace GOL_2019
         {
             settings.NumberOfCellsY = (int)nud_Y.Value;
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.Show();
         }
     }
 }
