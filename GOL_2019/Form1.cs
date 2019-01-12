@@ -6,6 +6,7 @@ using DatabaseCL;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Linq;
+using System.Timers;
 
 namespace GOL_2019
 {
@@ -23,17 +24,11 @@ namespace GOL_2019
             InitializeComponent();
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
-            
+
             // Databinding Listbox
             gameDatas = LoadGame.LoadAll();
             gameDatas = new BindingList<GameData>();
             lbx_SavedGames.DataSource = gameDatas;
-
-            //DataSource comboBox with Enum.
-            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
-            cb_GameMode.SelectedItem = settings.GameMode;
-            
-        }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
@@ -42,18 +37,18 @@ namespace GOL_2019
 
             gl = new GameLogic();
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
-            GameGrid.CurrentCell = null;
+            GameGrid.CurrentCell = null; //Testade runt, funkar bara efter man har kört Form1, denna rad avmarkerar den ensamma lilla cellen.
 
             currentGame = new GameData();
             currentGame.Generations = gl.Generations;
-            
+
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
         {
             // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
             gl.Iterate();
- 
+
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
         }
@@ -87,6 +82,8 @@ namespace GOL_2019
                         MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
                         return;
                     }
+
+                    // This needs to change
                     gameDatas.Add(currentGame);
                     SaveGame.SaveAll(gameDatas);
                 }
@@ -102,36 +99,52 @@ namespace GOL_2019
 
         }
 
-        private void btn_Load_Click(object sender, EventArgs e)
+        private void btn_Load_Click(object sender, EventArgs eventArgs)
         {
+            // Disable loading until the current loaded save is done animating.
+            btn_Load.Enabled = false;
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
-            gameView.UpdateGameView(gd.Generations.Last(), GameGrid);
- 
+
+            //
+            int generationIndex = 0;
+            System.Timers.Timer timer = new System.Timers.Timer();
+
+            timer.Elapsed += new ElapsedEventHandler(delegate (object o, ElapsedEventArgs e)
+            {
+              if (generationIndex < gd.Generations.Count)
+              {
+                  Console.WriteLine($"Gen: {generationIndex} / {gd.Generations.Count - 1}");
+                  gameView.UpdateGameView(gd.Generations[generationIndex], GameGrid);
+                  generationIndex++;
+              } else
+              {
+                timer.Stop();
+                btn_Load.Enabled = true;
+              }
+            });
+
+            timer.Interval = 800;
+            timer.Enabled = true;
+
             // Can't iterate without a GameLogic instance
-            gl = new GameLogic();
-            btn_NextGeneration.Enabled = true;
+            //gl = new GameLogic();
+            //btn_NextGeneration.Enabled = true;
         }
 
-
-        public void btn_Delete_Click(object sender, EventArgs e)
-        {
-            // Kommenterade bara ut för att kunna kompilera och pusha.
-            /*
-              GOL b = new GOL();
-              var Id = b.GOL_Id;
-
-              DbManager a = new DbManager();
-              var Load = a.LoadFromDb();
-
-              List<GOL> DELETE = Load;
-              lbx_SavedGames.DataSource = DELETE;
-              DELETE.Remove((GOL)lbx_SavedGames.SelectedValue);
-            */
-        }
 
         public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
 
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+
+            if (gd != null)
+            {
+                gameDatas.Remove(gd);
+                DbManager.Delete(gd.ID);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

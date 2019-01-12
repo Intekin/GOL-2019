@@ -13,7 +13,7 @@ namespace GOL_2019
         int rowHeight = 35;
         int columnWidth = 35;
         int numOfColumns = 8;
-        int numOfRows = 8; 
+        int numOfRows = 8;
 
         public void SetWidth(int width)
         {
@@ -29,7 +29,6 @@ namespace GOL_2019
         {
             GameGrid.AutoGenerateColumns = false;
             GameGrid.RowTemplate.Height = rowHeight; //Can only set the height before the creation of the grid.
-
 
             GameGrid.Enabled = false;
             GameGrid.RowHeadersVisible = false;
@@ -54,7 +53,6 @@ namespace GOL_2019
                         GameGrid[i, j].Style.BackColor = Color.Black;
                     else
                         GameGrid[i, j].Style.BackColor = Color.White;
-
                 }
         }
     }
