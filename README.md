@@ -15,8 +15,8 @@ Onsdag - kl 12:30-16:20
 Torsdag - kl 10-14
 
 To-do:
-- Kontrollera dubletter vid sparning (& overrides?)
-- "Animera" sparning när användaren laddar den (spela upp gen 0 -> sista)
-- Radera sparningar
-- Finlir (Snygga till UIt, eventuella extrafunktioner, städa kod)
-- Förbereda redovisning
+*DONE* 	Kontrollera dubletter vid sparning (& overrides?)
+*DONE?*	"Animera" sparning när användaren laddar den (spela upp gen 0 -> sista)
+*DONE* 	Radera sparningar
+- 		Finlir (Snygga till UIt, eventuella extrafunktioner, städa kod)
+- 		Förbereda redovisning
