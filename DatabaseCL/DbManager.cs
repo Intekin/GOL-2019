@@ -32,14 +32,26 @@ namespace DatabaseCL
 
         public static void SaveToDb(int id, string name, string generation)
         {
+
             DatabaseContext context = new DatabaseContext();
-            GOL g = new GOL()
+            var result = context.GOL.SingleOrDefault(x => x.GOL_Id == id);
+            if(result != null)
             {
-                Name = name,
-                DOA = generation
-            };
-            context.GOL.Add(g);
-            context.SaveChanges();
+                result.DOA = generation;
+                result.Name = name;
+
+                context.SaveChanges();
+            }
+            else
+            {
+                GOL g = new GOL
+                {
+                    Name = name,
+                    DOA = generation
+                };
+                context.GOL.Add(g);
+                context.SaveChanges();
+            }
         }
 
         public static void Delete(int id)
