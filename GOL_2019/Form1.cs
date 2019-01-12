@@ -14,7 +14,9 @@ namespace GOL_2019
         GameLogic gl;
         GameView gameView;
         GameData currentGame;
+        GameSettings settings = new GameSettings();
         BindingList<GameData> gameDatas;
+
 
         public Form1()
         {
@@ -22,12 +24,14 @@ namespace GOL_2019
             gameView = new GameView();
             gameView.InitGameView(GameGrid);
             
-
-            // Databinding
+            // Databinding Listbox
             gameDatas = LoadGame.LoadAll();
             gameDatas = new BindingList<GameData>();
             lbx_SavedGames.DataSource = gameDatas;
 
+            //DataSource comboBox with Enum.
+            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
+            cb_GameMode.SelectedItem = settings.GameMode;
             
         }
 
@@ -138,6 +142,12 @@ namespace GOL_2019
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            settings.GameMode = (GameSettings.GAMEMODE)cb_GameMode.SelectedIndex;
+            MessageBox.Show(settings.GameMode.ToString());
         }
     }
 }

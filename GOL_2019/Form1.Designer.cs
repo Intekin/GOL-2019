@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TestButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cb_GameMode = new System.Windows.Forms.ComboBox();
             this.tb_NameOfGame = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_StartNewGame = new System.Windows.Forms.Button();
@@ -54,7 +55,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TestButton);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cb_GameMode);
             this.groupBox1.Controls.Add(this.tb_NameOfGame);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btn_StartNewGame);
@@ -71,19 +73,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
-            // TestButton
+            // label3
             // 
-            this.TestButton.Location = new System.Drawing.Point(111, 291);
-            this.TestButton.Name = "TestButton";
-            this.TestButton.Size = new System.Drawing.Size(75, 23);
-            this.TestButton.TabIndex = 8;
-            this.TestButton.Text = "Test";
-            this.TestButton.UseVisualStyleBackColor = true;
-            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(103, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Game Mode";
+            // 
+            // cb_GameMode
+            // 
+            this.cb_GameMode.FormattingEnabled = true;
+            this.cb_GameMode.Location = new System.Drawing.Point(103, 30);
+            this.cb_GameMode.Name = "cb_GameMode";
+            this.cb_GameMode.Size = new System.Drawing.Size(96, 21);
+            this.cb_GameMode.TabIndex = 8;
+            this.cb_GameMode.SelectedIndexChanged += new System.EventHandler(this.cb_GameMode_SelectedIndexChanged);
             // 
             // tb_NameOfGame
             // 
-            this.tb_NameOfGame.Location = new System.Drawing.Point(7, 291);
+            this.tb_NameOfGame.Location = new System.Drawing.Point(8, 30);
             this.tb_NameOfGame.Margin = new System.Windows.Forms.Padding(2);
             this.tb_NameOfGame.MaxLength = 18;
             this.tb_NameOfGame.Name = "tb_NameOfGame";
@@ -93,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 275);
+            this.label2.Location = new System.Drawing.Point(5, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -102,7 +112,7 @@
             // 
             // btn_StartNewGame
             // 
-            this.btn_StartNewGame.Location = new System.Drawing.Point(7, 314);
+            this.btn_StartNewGame.Location = new System.Drawing.Point(109, 93);
             this.btn_StartNewGame.Margin = new System.Windows.Forms.Padding(2);
             this.btn_StartNewGame.Name = "btn_StartNewGame";
             this.btn_StartNewGame.Size = new System.Drawing.Size(89, 28);
@@ -113,17 +123,17 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(100, 227);
+            this.btn_Delete.Location = new System.Drawing.Point(112, 318);
             this.btn_Delete.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(84, 19);
+            this.btn_Delete.Size = new System.Drawing.Size(87, 19);
             this.btn_Delete.TabIndex = 5;
             this.btn_Delete.Text = "Delete";
             this.btn_Delete.UseVisualStyleBackColor = true;
             // 
             // btn_Load
             // 
-            this.btn_Load.Location = new System.Drawing.Point(7, 227);
+            this.btn_Load.Location = new System.Drawing.Point(5, 318);
             this.btn_Load.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Load.Name = "btn_Load";
             this.btn_Load.Size = new System.Drawing.Size(89, 19);
@@ -135,7 +145,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 32);
+            this.label1.Location = new System.Drawing.Point(5, 126);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 13);
@@ -145,10 +155,10 @@
             // lbx_SavedGames
             // 
             this.lbx_SavedGames.FormattingEnabled = true;
-            this.lbx_SavedGames.Location = new System.Drawing.Point(7, 50);
+            this.lbx_SavedGames.Location = new System.Drawing.Point(5, 141);
             this.lbx_SavedGames.Margin = new System.Windows.Forms.Padding(2);
             this.lbx_SavedGames.Name = "lbx_SavedGames";
-            this.lbx_SavedGames.Size = new System.Drawing.Size(179, 173);
+            this.lbx_SavedGames.Size = new System.Drawing.Size(194, 173);
             this.lbx_SavedGames.TabIndex = 2;
             // 
             // groupBox2
@@ -284,12 +294,13 @@
         private System.Windows.Forms.Button btn_NextGeneration;
         private System.Windows.Forms.Button btn_SaveGame;
         private System.Windows.Forms.DataGridView GameGrid;
-        private System.Windows.Forms.Button TestButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem arkivToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cb_GameMode;
     }
 }
 
