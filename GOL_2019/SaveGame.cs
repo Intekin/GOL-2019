@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseCL;
 
@@ -38,11 +34,6 @@ namespace GOL_2019
                     MessageBox.Show(ex.ToString());
                 }
             }
-        }
-
-        public static void SaveCurrent()
-        {
-
         }
     }
 }

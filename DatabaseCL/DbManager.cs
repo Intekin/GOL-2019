@@ -1,30 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DatabaseCL
 {
     public class DbManager
     {
-        public static void TestDb()
-        {
-            DatabaseContext context = new DatabaseContext();
-            GOL g = new GOL()
-            {
-                Name = "Test",
-                DOA = "0101010101010101010101010101010101010101010101010101010101010101"
-            };
-            context.GOL.Add(g);
-            context.SaveChanges();
-        }
-
         public static List<GOL> LoadFromDb()
         {
             DatabaseContext context = new DatabaseContext();
-
             var listGol = context.GOL.ToList();
 
             return listGol;
@@ -32,7 +16,6 @@ namespace DatabaseCL
 
         public static void SaveToDb(int id, string name, string generation)
         {
-
             DatabaseContext context = new DatabaseContext();
             var result = context.GOL.SingleOrDefault(x => x.GOL_Id == id);
             if(result != null)
@@ -63,6 +46,5 @@ namespace DatabaseCL
             context.GOL.Remove(idToRemove);
             context.SaveChanges();
         }
-
     }
 }

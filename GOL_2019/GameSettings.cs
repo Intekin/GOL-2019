@@ -9,27 +9,10 @@ namespace GOL_2019
     class GameSettings
     {
         public enum GAMEMODE { Standard, Extended};
-        private int cellNumbersX = 8;
-        private int cellNumbersY = 8;
-        private GAMEMODE gameMode = GAMEMODE.Standard;
 
-        public GAMEMODE GameMode
-        {
-            get { return gameMode; }
-            set { gameMode = value; }
-        }
+        public GAMEMODE GameMode { get; set; } = GAMEMODE.Standard;
 
-        public int NumberOfCellsX
-        {
-            get { return cellNumbersX; }
-            set { cellNumbersX = value; }
-        }
-
-        public int NumberOfCellsY
-        {
-            get { return cellNumbersY; }
-            set { cellNumbersY = value; }
-        }
-
+        public int NumberOfCellsX { get; set; } = 8;
+        public int NumberOfCellsY { get; set; } = 8;
     }
 }

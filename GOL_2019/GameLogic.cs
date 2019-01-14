@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GOL_2019
-{
-    
+{   
     struct Cell
     {
         public int x, y;
@@ -109,8 +105,8 @@ namespace GOL_2019
                     if (cellNeighbours < 2 || cellNeighbours > 3)
                     {
                         cellsToAlter.Add(new Cell(x, y, false));
-                        newGeneration[x, y] = 0;
-                        //PopulatedCells--;
+                        //newGeneration[x, y] = 0;
+                        PopulatedCells--;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.

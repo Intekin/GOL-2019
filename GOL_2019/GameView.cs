@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace GOL_2019
@@ -38,6 +33,7 @@ namespace GOL_2019
             }
             gameGrid.CurrentCell = null;
         }
+
         public void UpdateGameView(int[,] currentGeneration, DataGridView gameGrid)
         {
             for (int i = 0; i < rows; i++)

@@ -8,27 +8,9 @@ namespace GOL_2019
 {
     class GameData
     {
-        private string name;
-        private List<int[,]> generations;
-        private int id;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public List<int[,]> Generations
-        {
-            get { return generations; }
-            set { generations = value; }
-        }
-
-        public int ID
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        public string Name { get; set; }
+        public List<int[,]> Generations { get; set; }
+        public int ID { get; set; }
 
         // List<GameData> for the Listbox will now by default just show the name
         public override string ToString () { return Name; }

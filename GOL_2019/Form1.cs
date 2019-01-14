@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 using DatabaseCL;
 using System.Text.RegularExpressions;
@@ -17,24 +15,10 @@ namespace GOL_2019
         GameSettings settings = new GameSettings();
         BindingList<GameData> gameDatas;
 
-
         public Form1()
         {
             InitializeComponent();
-            gameView = new GameView();
-            gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
-
-            // Databinding Listbox
-            gameDatas = new BindingList<GameData>();
-            gameDatas = LoadGame.LoadAll();
-            lbx_SavedGames.DataSource = gameDatas;
-
-            //Datasource
-            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
-            cb_GameMode.SelectedItem = settings.GameMode;
-
-            nud_X.Value = settings.NumberOfCellsY;
-            nud_Y.Value = settings.NumberOfCellsX;
+            InitBaseSettings();
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -48,7 +32,6 @@ namespace GOL_2019
 
             currentGame = new GameData();
             currentGame.Generations = gl.Generations;
-
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
@@ -57,7 +40,6 @@ namespace GOL_2019
             gl.Iterate();
 
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
-
         }
 
         private void btn_SaveGame_Click(object sender, EventArgs e)
@@ -91,13 +73,13 @@ namespace GOL_2019
             {
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void btn_Load_Click(object sender, EventArgs eventArgs)
         {
             // Disable loading until the current loaded save is done animating.
             btn_Load.Enabled = false;
+            GameGrid.CurrentCell = null;
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
 
             //
@@ -120,15 +102,11 @@ namespace GOL_2019
             timer.Interval = 800;
             timer.Enabled = true;
 
-            // Can't iterate without a GameLogic instance
-            //gl = new GameLogic();
-            //btn_NextGeneration.Enabled = true;
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
-
             if (gd != null)
             {
                 gameDatas.Remove(gd);
@@ -169,18 +147,38 @@ namespace GOL_2019
         {
             settings.NumberOfCellsX = (int)nud_X.Value;
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+            btn_NextGeneration.Enabled = false;
         }
 
         private void nud_Y_ValueChanged(object sender, EventArgs e)
         {
             settings.NumberOfCellsY = (int)nud_Y.Value;
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+            btn_NextGeneration.Enabled = false;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About about = new About();
             about.Show();
+        }
+
+        private void InitBaseSettings()
+        {
+            gameView = new GameView();
+            gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+
+            // Databinding Listbox
+            gameDatas = new BindingList<GameData>();
+            gameDatas = LoadGame.LoadAll();
+            lbx_SavedGames.DataSource = gameDatas;
+
+            //Datasource
+            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
+            cb_GameMode.SelectedItem = settings.GameMode;
+
+            nud_X.Value = settings.NumberOfCellsY;
+            nud_Y.Value = settings.NumberOfCellsX;
         }
     }
 }

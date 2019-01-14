@@ -9,7 +9,6 @@ namespace GOL_2019
     {
         public static BindingList<GameData> LoadAll()
         {
-
             List<GOL> golData = new List<GOL>();
             BindingList<GameData> gameData = new BindingList<GameData>();
 
