@@ -6,7 +6,6 @@ using DatabaseCL;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Linq;
-using System.Timers;
 
 namespace GOL_2019
 {
@@ -115,13 +114,12 @@ namespace GOL_2019
 
             //
             int generationIndex = 0;
-            System.Timers.Timer timer = new System.Timers.Timer();
+            Timer timer = new Timer();
 
-            timer.Elapsed += new ElapsedEventHandler(delegate (object o, ElapsedEventArgs e)
+            timer.Tick += new EventHandler(delegate (object o, EventArgs e)
             {
               if (generationIndex < gd.Generations.Count)
               {
-                  Console.WriteLine($"Gen: {generationIndex} / {gd.Generations.Count - 1}");
                   gameView.UpdateGameView(gd.Generations[generationIndex], GameGrid);
                   generationIndex++;
               } else
