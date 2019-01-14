@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nud_Y = new System.Windows.Forms.NumericUpDown();
+            this.nud_X = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_GameMode = new System.Windows.Forms.ComboBox();
             this.tb_NameOfGame = new System.Windows.Forms.TextBox();
@@ -39,24 +43,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbx_SavedGames = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_SaveGame = new System.Windows.Forms.Button();
             this.GameGrid = new System.Windows.Forms.DataGridView();
             this.btn_NextGeneration = new System.Windows.Forms.Button();
-            this.btn_SaveGame = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.arkivToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nud_X = new System.Windows.Forms.NumericUpDown();
-            this.nud_Y = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_X)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_X)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -77,11 +77,45 @@
             this.groupBox1.Location = new System.Drawing.Point(8, 32);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(202, 401);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(110, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Y:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(110, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "X:";
+            // 
+            // nud_Y
+            // 
+            this.nud_Y.Location = new System.Drawing.Point(133, 80);
+            this.nud_Y.Name = "nud_Y";
+            this.nud_Y.Size = new System.Drawing.Size(65, 20);
+            this.nud_Y.TabIndex = 11;
+            this.nud_Y.ValueChanged += new System.EventHandler(this.nud_Y_ValueChanged);
+            // 
+            // nud_X
+            // 
+            this.nud_X.Location = new System.Drawing.Point(133, 54);
+            this.nud_X.Name = "nud_X";
+            this.nud_X.Size = new System.Drawing.Size(65, 20);
+            this.nud_X.TabIndex = 10;
+            this.nud_X.ValueChanged += new System.EventHandler(this.nud_X_ValueChanged);
             // 
             // label3
             // 
@@ -97,7 +131,7 @@
             // 
             this.cb_GameMode.FormattingEnabled = true;
             this.cb_GameMode.Location = new System.Drawing.Point(108, 27);
-            this.cb_GameMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_GameMode.Margin = new System.Windows.Forms.Padding(2);
             this.cb_GameMode.Name = "cb_GameMode";
             this.cb_GameMode.Size = new System.Drawing.Size(90, 21);
             this.cb_GameMode.TabIndex = 8;
@@ -182,11 +216,22 @@
             this.groupBox2.Location = new System.Drawing.Point(212, 34);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(519, 399);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Game Of Life";
+            // 
+            // btn_SaveGame
+            // 
+            this.btn_SaveGame.Location = new System.Drawing.Point(419, 371);
+            this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_SaveGame.Name = "btn_SaveGame";
+            this.btn_SaveGame.Size = new System.Drawing.Size(96, 22);
+            this.btn_SaveGame.TabIndex = 4;
+            this.btn_SaveGame.Text = "Save Game";
+            this.btn_SaveGame.UseVisualStyleBackColor = true;
+            this.btn_SaveGame.Click += new System.EventHandler(this.btn_SaveGame_Click);
             // 
             // GameGrid
             // 
@@ -221,17 +266,6 @@
             this.btn_NextGeneration.UseVisualStyleBackColor = true;
             this.btn_NextGeneration.Click += new System.EventHandler(this.btn_NextGeneration_Click);
             // 
-            // btn_SaveGame
-            // 
-            this.btn_SaveGame.Location = new System.Drawing.Point(419, 371);
-            this.btn_SaveGame.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_SaveGame.Name = "btn_SaveGame";
-            this.btn_SaveGame.Size = new System.Drawing.Size(96, 22);
-            this.btn_SaveGame.TabIndex = 4;
-            this.btn_SaveGame.Text = "Save Game";
-            this.btn_SaveGame.UseVisualStyleBackColor = true;
-            this.btn_SaveGame.Click += new System.EventHandler(this.btn_SaveGame_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -256,14 +290,14 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -273,40 +307,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // nud_X
-            // 
-            this.nud_X.Location = new System.Drawing.Point(133, 54);
-            this.nud_X.Name = "nud_X";
-            this.nud_X.Size = new System.Drawing.Size(65, 20);
-            this.nud_X.TabIndex = 10;
-            this.nud_X.ValueChanged += new System.EventHandler(this.nud_X_ValueChanged);
-            // 
-            // nud_Y
-            // 
-            this.nud_Y.Location = new System.Drawing.Point(133, 80);
-            this.nud_Y.Name = "nud_Y";
-            this.nud_Y.Size = new System.Drawing.Size(65, 20);
-            this.nud_Y.TabIndex = 11;
-            this.nud_Y.ValueChanged += new System.EventHandler(this.nud_Y_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(110, 57);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "X:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(110, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Y:";
             // 
             // Form1
             // 
@@ -321,12 +321,12 @@
             this.Text = "GOL";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_X)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GameGrid)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_X)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

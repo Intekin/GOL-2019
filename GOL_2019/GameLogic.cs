@@ -32,9 +32,9 @@ namespace GOL_2019
             {
                 int x = random.Next(0, GridSizeX);
                 int y = random.Next(0, GridSizeY);
-                if (GameGrid[y, x] < 1)
+                if (GameGrid[x, y] < 1)
                 {
-                    GameGrid[y, x] = 1;
+                    GameGrid[x, y] = 1;
                     PopulatedCells++;
                 }
             } while (PopulatedCells < InitialCells);

@@ -43,10 +43,10 @@ namespace GOL_2019
             for (int i = 0; i < rows; i++)
                 for (int j = 0; j < columns; j++)
                 {
-                    if (currentGeneration[i, j] == 1)
-                        gameGrid[i, j].Style.BackColor = Color.Black;
+                    if (currentGeneration[j, i] == 1)
+                        gameGrid[j, i].Style.BackColor = Color.Black;
                     else
-                        gameGrid[i, j].Style.BackColor = Color.White;
+                        gameGrid[j, i].Style.BackColor = Color.White;
                 }
         }
     }
