@@ -7,6 +7,20 @@ using System.Threading.Tasks;
 
 namespace GOL_2019
 {
+    
+    struct Cell
+    {
+        public int x, y;
+        public bool Alive;
+
+        public Cell(int X, int Y, bool alive)
+        {
+          x = X;
+          y = Y;
+          Alive = alive;
+        }
+    }
+
     class GameLogic
     {
         public int[,] GameGrid { get; private set; }           // Current state of the game or "generation".
@@ -83,6 +97,7 @@ namespace GOL_2019
 
             int cellNeighbours;
             int[,] newGeneration = (int[,])GameGrid.Clone();
+            List<Cell> cellsToAlter = new List<Cell>();      
 
             for (int y = 0; y < GridSizeY; y++)
                 for (int x = 0; x < GridSizeX; x++)
@@ -93,16 +108,23 @@ namespace GOL_2019
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
                     if (cellNeighbours < 2 || cellNeighbours > 3)
                     {
+                        cellsToAlter.Add(new Cell(x, y, false));
                         newGeneration[x, y] = 0;
-                        PopulatedCells--;
+                        //PopulatedCells--;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
                     if (newGeneration[x, y] == 0 && cellNeighbours == 3)
                     {
-                        newGeneration[x, y] = 1;
+                        cellsToAlter.Add(new Cell(x, y, true));
+                        //newGeneration[x, y] = 1;
                         PopulatedCells++;
                     }
+                }
+
+                foreach(Cell cell in cellsToAlter)
+                {
+                    newGeneration[cell.x, cell.y] = Convert.ToInt32(cell.Alive);
                 }
 
             GameGrid = newGeneration;
