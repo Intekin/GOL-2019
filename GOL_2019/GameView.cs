@@ -10,48 +10,43 @@ namespace GOL_2019
 {
     class GameView
     {
-        int rowHeight = 35;
-        int columnWidth = 35;
-        int numOfColumns = 8;
-        int numOfRows = 8; 
+        int columns;
+        int rows;
 
-        public void SetWidth(int width)
+        public void InitGameView(DataGridView gameGrid, int numCol, int numRow)
         {
-            columnWidth = width;
-        }
+            columns = numCol;
+            rows = numRow;
 
-        public void SetHeight(int height)
-        {
-            rowHeight = height;
-        }
+            gameGrid.Rows.Clear();
+            gameGrid.Columns.Clear();
 
-        public void InitGameView(DataGridView GameGrid)
-        {
-            GameGrid.AutoGenerateColumns = false;
-            GameGrid.RowTemplate.Height = rowHeight; //Can only set the height before the creation of the grid.
+            gameGrid.AutoGenerateColumns = false;
+            gameGrid.RowTemplate.Height = gameGrid.Height/ rows; //Can only set the height before the creation of the grid.
 
-            GameGrid.Enabled = false;
-            GameGrid.RowHeadersVisible = false;
-            GameGrid.ColumnHeadersVisible = false;
-            for (int i = 1; i <= numOfColumns; i++)
+            gameGrid.Enabled = false;
+            gameGrid.RowHeadersVisible = false;
+            gameGrid.ColumnHeadersVisible = false;
+            for (int i = 1; i <= columns; i++)
             {
-                GameGrid.Columns.Add("col" + i, "column " + i);
-                GameGrid.Columns[i - 1].Width = columnWidth; //Can only seth the width of columns during its creation
+                gameGrid.Columns.Add("col" + i, "column " + i);
+                gameGrid.Columns[i - 1].Width = gameGrid.Width/ columns; //Can only seth the width of columns during its creation
             }
-            for (int j = 0; j < numOfRows-1; j++) //minus one Row, since one row is aut created;
+            for (int j = 0; j < rows; j++)
             {
-                GameGrid.Rows.Add();
+                gameGrid.Rows.Add();
             }
+            gameGrid.CurrentCell = null;
         }
-        public void UpdateGameView(int[,] currentGeneration, DataGridView GameGrid)
+        public void UpdateGameView(int[,] currentGeneration, DataGridView gameGrid)
         {
-            for (int i = 0; i < 8; i++)
-                for (int j = 0; j < 8; j++)
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < columns; j++)
                 {
-                    if (currentGeneration[i, j] == 1)
-                        GameGrid[i, j].Style.BackColor = Color.Black;
+                    if (currentGeneration[j, i] == 1)
+                        gameGrid[j, i].Style.BackColor = Color.Black;
                     else
-                        GameGrid[i, j].Style.BackColor = Color.White;
+                        gameGrid[j, i].Style.BackColor = Color.White;
                 }
         }
     }
