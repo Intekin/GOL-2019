@@ -1,10 +1,7 @@
-﻿using DatabaseCL;
-using System;
+﻿
+using DatabaseCL;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GOL_2019
 {

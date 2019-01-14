@@ -25,8 +25,8 @@ namespace GOL_2019
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
 
             // Databinding Listbox
-            gameDatas = LoadGame.LoadAll();
             gameDatas = new BindingList<GameData>();
+            gameDatas = LoadGame.LoadAll();
             lbx_SavedGames.DataSource = gameDatas;
 
             //Datasource
@@ -58,18 +58,6 @@ namespace GOL_2019
 
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
 
-        }
-
-        private void TestButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DbManager.TestDb();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         private void btn_SaveGame_Click(object sender, EventArgs e)
@@ -137,11 +125,6 @@ namespace GOL_2019
             //btn_NextGeneration.Enabled = true;
         }
 
-
-        public void lbx_SavedGames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
         private void btn_Delete_Click(object sender, EventArgs e)
         {
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
@@ -156,11 +139,6 @@ namespace GOL_2019
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
