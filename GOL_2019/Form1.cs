@@ -12,8 +12,9 @@ namespace GOL_2019
         GameLogic gl;
         GameView gameView;
         GameData currentGame;
-        GameSettings settings = new GameSettings();
+        GameSettings settings;
         BindingList<GameData> gameDatas;
+        Timer loadingTimer;
 
         public Form1()
         {
@@ -51,27 +52,33 @@ namespace GOL_2019
                 bool nameValidated = false;
                 if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length >= 2) nameValidated = true;
 
-                if (nameValidated)
-                {
-                    currentGame.Name = name;
-                    if (gameDatas.Any(x => x.Name == currentGame.Name))
-                    {
-                        MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
-                        return;
-                    }
-
-                    // This needs to change
-                    gameDatas.Add(currentGame);
-                    SaveGame.SaveAll(gameDatas);
-                }
-                else
+                if (!nameValidated)
                 {
                     MessageBox.Show("The name must be 2 characters and can only consist of letters and numbers.");
+                    return;
                 }
-              }
+
+                if (currentGame == null)
+                {
+                    MessageBox.Show("No game to save. Try starting or loading one!");
+                    return;
+                }
+
+                currentGame.Name = name;
+                if (gameDatas.Any(x => x.Name == currentGame.Name))
+                {
+                    MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
+                    return;
+                }
+
+                // This needs to change
+                gameDatas.Add(currentGame);
+                SaveGame.SaveAll(gameDatas);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                throw ex;
             }
         }
 
@@ -79,14 +86,16 @@ namespace GOL_2019
         {
             // Disable loading until the current loaded save is done animating.
             btn_Load.Enabled = false;
+            btn_StartNewGame.Enabled = false;
+            btn_Delete.Enabled = false;
+            btn_SaveGame.Enabled = false;
+            btn_StopLoading.Visible = true;
+
             GameGrid.CurrentCell = null;
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
 
-            //
-            int generationIndex = 0;
-            Timer timer = new Timer();
-
-            timer.Tick += new EventHandler(delegate (object o, EventArgs e)
+            int generationIndex = 0; 
+            loadingTimer.Tick += new EventHandler(delegate (object o, EventArgs e)
             {
               if (generationIndex < gd.Generations.Count)
               {
@@ -94,14 +103,27 @@ namespace GOL_2019
                   generationIndex++;
               } else
               {
-                timer.Stop();
-                btn_Load.Enabled = true;
+                  loadingTimer.Stop();
+                  btn_StopLoading.Visible = false;
+                  btn_Load.Enabled = true;
+                  btn_SaveGame.Enabled = true;
+                  btn_StartNewGame.Enabled = true;
+                  btn_Delete.Enabled = true;
               }
             });
 
-            timer.Interval = 800;
-            timer.Enabled = true;
+            loadingTimer.Interval = 800;
+            loadingTimer.Enabled = true;
+        }
 
+        private void btn_StopLoading_Click(object sender, EventArgs e)
+        {
+            loadingTimer.Stop();
+            btn_StopLoading.Visible = false;
+            btn_Load.Enabled = true;
+            btn_SaveGame.Enabled = true;
+            btn_StartNewGame.Enabled = true;
+            btn_Delete.Enabled = true;
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -165,6 +187,8 @@ namespace GOL_2019
 
         private void InitBaseSettings()
         {
+            loadingTimer = new Timer();
+            settings = new GameSettings();
             gameView = new GameView();
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
 
@@ -180,5 +204,7 @@ namespace GOL_2019
             nud_X.Value = settings.NumberOfCellsY;
             nud_Y.Value = settings.NumberOfCellsX;
         }
-    }
+
+
+  }
 }
