@@ -4,6 +4,7 @@ using DatabaseCL;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Linq;
+using System.Diagnostics;
 
 namespace GOL_2019
 {
@@ -39,7 +40,6 @@ namespace GOL_2019
         {
             // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
             gl.Iterate();
-
             gameView.UpdateGameView(gl.GameGrid, GameGrid);
         }
 
@@ -47,7 +47,7 @@ namespace GOL_2019
         {
             try
             {
-                // Validate name to avoid SQL errors whilst saving
+                // Validate name to avoid SQL errors while saving
                 string name = tb_NameOfGame.Text;
                 bool nameValidated = false;
                 if (Regex.IsMatch(name, @"^[a-zA-Z0-9]+$") && name.Length >= 2) nameValidated = true;
@@ -77,8 +77,8 @@ namespace GOL_2019
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.ToString());
-                throw ex;
+                MessageBox.Show("Something went wrong when trying to save the game.");
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -93,13 +93,14 @@ namespace GOL_2019
 
             GameGrid.CurrentCell = null;
             GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+            currentGame = gd;      
 
             int generationIndex = 0; 
             loadingTimer.Tick += new EventHandler(delegate (object o, EventArgs e)
             {
-              if (generationIndex < gd.Generations.Count)
+              if (generationIndex < currentGame.Generations.Count)
               {
-                  gameView.UpdateGameView(gd.Generations[generationIndex], GameGrid);
+                  gameView.UpdateGameView(currentGame.Generations[generationIndex], GameGrid);
                   generationIndex++;
               } else
               {
