@@ -74,6 +74,8 @@ namespace GOL_2019
                 // This needs to change
                 gameDatas.Add(currentGame);
                 SaveGame.SaveAll(gameDatas);
+
+                ReloadData();
             }
             catch (Exception ex)
             {
@@ -193,10 +195,7 @@ namespace GOL_2019
             gameView = new GameView();
             gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
 
-            // Databinding Listbox
-            gameDatas = new BindingList<GameData>();
-            gameDatas = LoadGame.LoadAll();
-            lbx_SavedGames.DataSource = gameDatas;
+            ReloadData();
 
             //Datasource
             cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
@@ -206,6 +205,13 @@ namespace GOL_2019
             nud_Y.Value = settings.NumberOfCellsX;
         }
 
+        private void ReloadData()
+        {
+            // Databinding Listbox
+            gameDatas = new BindingList<GameData>();
+            gameDatas = LoadGame.LoadAll();
+            lbx_SavedGames.DataSource = gameDatas;
+        }
 
-  }
+    }
 }
