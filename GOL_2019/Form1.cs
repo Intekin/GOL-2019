@@ -10,11 +10,9 @@ namespace GOL_2019
 {
     public partial class Form1 : Form
     {
-        GameLogic gl;
+        GameLogic gameLogic;
         GameView gameView;
         GameData currentGame;
-        GameSettings settings;
-        BindingList<GameData> gameDatas;
         Timer loadingTimer;
 
         public Form1()
@@ -23,24 +21,38 @@ namespace GOL_2019
             InitBaseSettings();
         }
 
+        private void InitBaseSettings()
+        {
+            loadingTimer = new Timer();
+            gameView = new GameView();
+
+            nud_X.Value = GameSettings.Width;
+            nud_Y.Value = GameSettings.Height;
+
+            gameView.InitGameView(PB_MainView, (int)nud_X.Value, (int)nud_Y.Value);
+
+            //Datasource
+            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
+            cb_GameMode.SelectedItem = GameSettings.GameMode;
+
+
+        }
+
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
-            // Can't iterate without a GameLogic instance
-            btn_NextGeneration.Enabled = true;
 
-            gl = new GameLogic(settings.NumberOfCellsX, settings.NumberOfCellsY, settings.NumberOfCellsX*settings.NumberOfCellsY/5);
-            gameView.UpdateGameView(gl.GameGrid, GameGrid);
-            GameGrid.CurrentCell = null; //Testade runt, funkar bara efter man har kört Form1, denna rad avmarkerar den ensamma lilla cellen.
-
+            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, GameSettings.Width * GameSettings.Height / 5);
+           
             currentGame = new GameData();
-            currentGame.Generations = gl.Generations;
+            currentGame.Generations = gameLogic.Generations;
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
         {
             // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
-            gl.Iterate();
-            gameView.UpdateGameView(gl.GameGrid, GameGrid);
+            gameLogic.Iterate();
+
+            gameView.UpdateGameView(gameLogic.Generations.Last(), PB_MainView);
         }
 
         private void btn_SaveGame_Click(object sender, EventArgs e)
@@ -65,17 +77,6 @@ namespace GOL_2019
                 }
 
                 currentGame.Name = name;
-                if (gameDatas.Any(x => x.Name == currentGame.Name))
-                {
-                    MessageBox.Show("You need to give your save a unique name: " + currentGame.Name);
-                    return;
-                }
-
-                // This needs to change
-                gameDatas.Add(currentGame);
-                SaveGame.SaveAll(gameDatas);
-
-                ReloadData();
             }
             catch (Exception ex)
             {
@@ -84,134 +85,119 @@ namespace GOL_2019
             }
         }
 
-        private void btn_Load_Click(object sender, EventArgs eventArgs)
-        {
-            // Disable loading until the current loaded save is done animating.
-            btn_Load.Enabled = false;
-            btn_StartNewGame.Enabled = false;
-            btn_Delete.Enabled = false;
-            btn_SaveGame.Enabled = false;
-            btn_StopLoading.Visible = true;
+        //private void btn_Load_Click(object sender, EventArgs eventArgs)
+        //{
+        //    // Disable loading until the current loaded save is done animating.
+        //    btn_Load.Enabled = false;
+        //    btn_StartNewGame.Enabled = false;
+        //    btn_Delete.Enabled = false;
+        //    btn_SaveGame.Enabled = false;
+        //    btn_StopLoading.Visible = true;
 
-            GameGrid.CurrentCell = null;
-            GameData gd = (GameData)lbx_SavedGames.SelectedItem;
-            currentGame = gd;      
+        //    GameGrid.CurrentCell = null;
+        //    GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+        //    currentGame = gd;      
 
-            int generationIndex = 0; 
-            loadingTimer.Tick += new EventHandler(delegate (object o, EventArgs e)
-            {
-              if (generationIndex < currentGame.Generations.Count)
-              {
-                  gameView.UpdateGameView(currentGame.Generations[generationIndex], GameGrid);
-                  generationIndex++;
-              } else
-              {
-                  loadingTimer.Stop();
-                  btn_StopLoading.Visible = false;
-                  btn_Load.Enabled = true;
-                  btn_SaveGame.Enabled = true;
-                  btn_StartNewGame.Enabled = true;
-                  btn_Delete.Enabled = true;
-              }
-            });
+        //    int generationIndex = 0; 
+        //    loadingTimer.Tick += new EventHandler(delegate (object o, EventArgs e)
+        //    {
+        //      if (generationIndex < currentGame.Generations.Count)
+        //      {
+        //          gameView.UpdateGameView(currentGame.Generations[generationIndex], GameGrid);
+        //          generationIndex++;
+        //      } else
+        //      {
+        //          loadingTimer.Stop();
+        //          btn_StopLoading.Visible = false;
+        //          btn_Load.Enabled = true;
+        //          btn_SaveGame.Enabled = true;
+        //          btn_StartNewGame.Enabled = true;
+        //          btn_Delete.Enabled = true;
+        //      }
+        //    });
 
-            loadingTimer.Interval = 800;
-            loadingTimer.Enabled = true;
-        }
+        //    loadingTimer.Interval = 800;
+        //    loadingTimer.Enabled = true;
+        //}
 
-        private void btn_StopLoading_Click(object sender, EventArgs e)
-        {
-            loadingTimer.Stop();
-            btn_StopLoading.Visible = false;
-            btn_Load.Enabled = true;
-            btn_SaveGame.Enabled = true;
-            btn_StartNewGame.Enabled = true;
-            btn_Delete.Enabled = true;
-        }
+        //private void btn_StopLoading_Click(object sender, EventArgs e)
+        //{
+        //    loadingTimer.Stop();
+        //    btn_StopLoading.Visible = false;
+        //    btn_Load.Enabled = true;
+        //    btn_SaveGame.Enabled = true;
+        //    btn_StartNewGame.Enabled = true;
+        //    btn_Delete.Enabled = true;
+        //}
 
-        private void btn_Delete_Click(object sender, EventArgs e)
-        {
-            GameData gd = (GameData)lbx_SavedGames.SelectedItem;
-            if (gd != null)
-            {
-                gameDatas.Remove(gd);
-                DbManager.Delete(gd.ID);
-            }
-        }
+        //private void btn_Delete_Click(object sender, EventArgs e)
+        //{
+        //    GameData gd = (GameData)lbx_SavedGames.SelectedItem;
+        //    if (gd != null)
+        //    {
+        //        gameDatas.Remove(gd);
+        //        DbManager.Delete(gd.ID);
+        //    }
+        //}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            settings.GameMode = (GameSettings.GAMEMODE)cb_GameMode.SelectedIndex;
+        //private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    settings.GameMode = (GameSettings.GAMEMODE)cb_GameMode.SelectedIndex;
 
-            if(settings.GameMode == GameSettings.GAMEMODE.Standard)
-            {
-                btn_Delete.Enabled = true;
-                btn_Load.Enabled = true;
-                btn_SaveGame.Enabled = true;
-                nud_X.Enabled = false;
-                nud_Y.Enabled = false;
-                settings.NumberOfCellsX = 8;
-                settings.NumberOfCellsY = 8;
-            }
-            if(settings.GameMode == GameSettings.GAMEMODE.Extended)
-            {
-                btn_Delete.Enabled = false;
-                btn_Load.Enabled = false;
-                btn_SaveGame.Enabled = false;
-                nud_X.Enabled = true;
-                nud_Y.Enabled = true;
-            }
-        }
+        //    if(settings.GameMode == GameSettings.GAMEMODE.Standard)
+        //    {
+        //        btn_Delete.Enabled = true;
+        //        btn_Load.Enabled = true;
+        //        btn_SaveGame.Enabled = true;
+        //        nud_X.Enabled = false;
+        //        nud_Y.Enabled = false;
+        //        settings.NumberOfCellsX = 8;
+        //        settings.NumberOfCellsY = 8;
+        //    }
+        //    if(settings.GameMode == GameSettings.GAMEMODE.Extended)
+        //    {
+        //        btn_Delete.Enabled = false;
+        //        btn_Load.Enabled = false;
+        //        btn_SaveGame.Enabled = false;
+        //        nud_X.Enabled = true;
+        //        nud_Y.Enabled = true;
+        //    }
+        //}
 
-        private void nud_X_ValueChanged(object sender, EventArgs e)
-        {
-            settings.NumberOfCellsX = (int)nud_X.Value;
-            gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
-            btn_NextGeneration.Enabled = false;
-        }
+        //private void nud_X_ValueChanged(object sender, EventArgs e)
+        //{
+        //    settings.NumberOfCellsX = (int)nud_X.Value;
+        //    gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+        //    btn_NextGeneration.Enabled = false;
+        //}
 
-        private void nud_Y_ValueChanged(object sender, EventArgs e)
-        {
-            settings.NumberOfCellsY = (int)nud_Y.Value;
-            gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
-            btn_NextGeneration.Enabled = false;
-        }
+        //private void nud_Y_ValueChanged(object sender, EventArgs e)
+        //{
+        //    settings.NumberOfCellsY = (int)nud_Y.Value;
+        //    gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
+        //    btn_NextGeneration.Enabled = false;
+        //}
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            About about = new About();
-            about.Show();
-        }
+        //private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    About about = new About();
+        //    about.Show();
+        //}
 
-        private void InitBaseSettings()
-        {
-            loadingTimer = new Timer();
-            settings = new GameSettings();
-            gameView = new GameView();
-            gameView.InitGameView(GameGrid, settings.NumberOfCellsX, settings.NumberOfCellsY);
 
-            ReloadData();
 
-            //Datasource
-            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
-            cb_GameMode.SelectedItem = settings.GameMode;
-
-            nud_X.Value = settings.NumberOfCellsY;
-            nud_Y.Value = settings.NumberOfCellsX;
-        }
-
-        private void ReloadData()
-        {
-            // Databinding Listbox
-            gameDatas = new BindingList<GameData>();
-            gameDatas = LoadGame.LoadAll();
-            lbx_SavedGames.DataSource = gameDatas;
-        }
+        //private void ReloadData()
+        //{
+        //    // Databinding Listbox
+        //    gameDatas = new BindingList<GameData>();
+        //    gameDatas = LoadGame.LoadAll();
+        //    lbx_SavedGames.DataSource = gameDatas;
+        //}
 
     }
 }

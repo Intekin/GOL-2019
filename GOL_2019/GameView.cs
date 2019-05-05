@@ -1,49 +1,58 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace GOL_2019
 {
     class GameView
     {
-        int columns;
-        int rows;
+        int Width = 320;
+        int Height = 240;
 
-        public void InitGameView(DataGridView gameGrid, int numCol, int numRow)
+        public void InitGameView(PictureBox picture, int width, int height)
         {
-            columns = numCol;
-            rows = numRow;
+            Width = width;
+            Height = height;
+            // Create a Bitmap object from a file.
+            Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
 
-            gameGrid.Rows.Clear();
-            gameGrid.Columns.Clear();
-
-            gameGrid.AutoGenerateColumns = false;
-            gameGrid.RowTemplate.Height = gameGrid.Height/ rows; //Can only set the height before the creation of the grid.
-
-            gameGrid.Enabled = false;
-            gameGrid.RowHeadersVisible = false;
-            gameGrid.ColumnHeadersVisible = false;
-            for (int i = 1; i <= columns; i++)
+            // Set each pixel in myBitmap to black.
+            for (int X = 0; X < myBitmap.Width; X++)
             {
-                gameGrid.Columns.Add("col" + i, "column " + i);
-                gameGrid.Columns[i - 1].Width = gameGrid.Width/ columns; //Can only seth the width of columns during its creation
+                for (int Y = 0; Y < myBitmap.Height; Y++)
+                {
+                    myBitmap.SetPixel(X, Y, Color.Black);
+                }
             }
-            for (int j = 0; j < rows; j++)
-            {
-                gameGrid.Rows.Add();
-            }
-            gameGrid.CurrentCell = null;
+            picture.Image = myBitmap;
+            picture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        public void UpdateGameView(int[,] currentGeneration, DataGridView gameGrid)
+        public void UpdateGameView(int[,] currentGeneration, PictureBox picture)
         {
-            for (int i = 0; i < rows; i++)
-                for (int j = 0; j < columns; j++)
+            // Create a Bitmap object from a file.
+            Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
+            Color color = new Color();
+            // Set each pixel in myBitmap to black.
+            for (int X = 0; X < myBitmap.Width; X++)
+            {
+                for (int Y = 0; Y < myBitmap.Height; Y++)
                 {
-                    if (currentGeneration[j, i] == 1)
-                        gameGrid[j, i].Style.BackColor = Color.Black;
-                    else
-                        gameGrid[j, i].Style.BackColor = Color.White;
+
+                    if(currentGeneration[X, Y] == 0)
+                    {
+                        color = Color.White;
+                    }
+                    if (currentGeneration[X, Y] == 1)
+                    {
+                        color = Color.Black;
+                    }
+                    myBitmap.SetPixel(X, Y, color);
                 }
+            }
+            picture.Image = myBitmap;
+            picture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
     }
 }
