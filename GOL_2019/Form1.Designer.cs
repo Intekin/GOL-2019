@@ -71,6 +71,11 @@
             // nud_Y
             // 
             this.nud_Y.Location = new System.Drawing.Point(312, 39);
+            this.nud_Y.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.nud_Y.Name = "nud_Y";
             this.nud_Y.Size = new System.Drawing.Size(65, 20);
             this.nud_Y.TabIndex = 11;
@@ -78,6 +83,11 @@
             // nud_X
             // 
             this.nud_X.Location = new System.Drawing.Point(220, 39);
+            this.nud_X.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.nud_X.Name = "nud_X";
             this.nud_X.Size = new System.Drawing.Size(65, 20);
             this.nud_X.TabIndex = 10;
@@ -133,6 +143,7 @@
             // 
             // btn_NextGeneration
             // 
+            this.btn_NextGeneration.Enabled = false;
             this.btn_NextGeneration.Location = new System.Drawing.Point(472, 34);
             this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NextGeneration.Name = "btn_NextGeneration";

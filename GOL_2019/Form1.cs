@@ -40,9 +40,14 @@ namespace GOL_2019
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
+            btn_NextGeneration.Enabled = true;
+
+            GameSettings.Width = (int)nud_X.Value;
+            GameSettings.Height = (int)nud_Y.Value;
 
             gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, GameSettings.Width * GameSettings.Height / 5);
-           
+            gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
+
             currentGame = new GameData();
             currentGame.Generations = gameLogic.Generations;
         }
