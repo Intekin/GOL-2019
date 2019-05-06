@@ -22,14 +22,15 @@ namespace GOL_2019
             {
                 for (int Y = 0; Y < myBitmap.Height; Y++)
                 {
-                    myBitmap.SetPixel(X, Y, Color.Black);
+                    myBitmap.SetPixel(X, Y, Color.White);
                 }
             }
             picture.Image = myBitmap;
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            
         }
 
-        public void UpdateGameView(int[,] currentGeneration, PictureBox picture)
+        public void UpdateGameView(Cell[,] currentGeneration, PictureBox picture)
         {
             // Create a Bitmap object from a file.
             Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
@@ -40,13 +41,17 @@ namespace GOL_2019
                 for (int Y = 0; Y < myBitmap.Height; Y++)
                 {
 
-                    if(currentGeneration[X, Y] == 0)
+                    if(currentGeneration[X, Y].State == CELL_STATE.Empty)
                     {
                         color = Color.White;
                     }
-                    if (currentGeneration[X, Y] == 1)
+                    if (currentGeneration[X, Y].State == CELL_STATE.Alive)
                     {
                         color = Color.Black;
+                    }
+                    if (currentGeneration[X, Y].State == CELL_STATE.Dead)
+                    {
+                        color = Color.Gray;
                     }
                     myBitmap.SetPixel(X, Y, color);
                 }

@@ -32,7 +32,7 @@ namespace GOL_2019
             gameView.InitGameView(PB_MainView, (int)nud_X.Value, (int)nud_Y.Value);
 
             //Datasource
-            cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GAMEMODE));
+            //cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GameMode));
             cb_GameMode.SelectedItem = GameSettings.GameMode;
 
 
@@ -45,7 +45,7 @@ namespace GOL_2019
             GameSettings.Width = (int)nud_X.Value;
             GameSettings.Height = (int)nud_Y.Value;
 
-            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, GameSettings.Width * GameSettings.Height / 5);
+            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, 30);
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
 
             currentGame = new GameData();

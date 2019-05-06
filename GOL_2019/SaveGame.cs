@@ -13,7 +13,7 @@ namespace GOL_2019
             {
                 string saveString = "";
 
-                foreach (int[,] array in data.Generations)
+                foreach (Cell[,] array in data.Generations)
                 {
                     string temp = "";
                     for (int y = 0; y < 8; y++)

@@ -9,7 +9,7 @@ namespace GOL_2019
     class GameData
     {
         public string Name { get; set; }
-        public List<int[,]> Generations { get; set; }
+        public List<Cell[,]> Generations { get; set; }
         public int ID { get; set; }
 
         // List<GameData> for the Listbox will now by default just show the name

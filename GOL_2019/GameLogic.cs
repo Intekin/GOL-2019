@@ -4,83 +4,86 @@ using System.Linq;
 
 namespace GOL_2019
 {   
-    struct Cell
-    {
-        public int x, y;
-        public bool Alive;
+    public enum CELL_STATE {Empty, Dead, Alive}
 
-        public Cell(int X, int Y, bool alive)
+    public class Cell
+    {
+        public CELL_STATE State;
+
+        public Cell() { State = CELL_STATE.Empty; }
+        public Cell(CELL_STATE state)
         {
-          x = X;
-          y = Y;
-          Alive = alive;
+          State = state;
         }
     }
 
     class GameLogic
     {
-        public int[,] GameGrid { get; private set; }           // Current state of the game or "generation".
-        private int GridSizeX, GridSizeY;             // Height & width of the square game grid. Ex; 8 = 8*8 grid with 64 cells.
-        private int InitialCells;
-        public int PopulatedCells { get; private set; }
+                
+        private int _gridSizeX, _gridSizeY;       
+        private int _initialCells;
 
-        public List<int[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
+        public int PopulatedCells { get; private set; }
+        public Cell[,] Grid { get; private set; }            
+
+        public List<Cell[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
         private Random random;
 
         public GameLogic(int gridSizeX, int gridSizeY, int initialCells)
         {
-            GridSizeX = gridSizeX;
-            GridSizeY = gridSizeY;
-            Generations = new List<int[,]>();
-            InitialCells = initialCells;
+            _gridSizeX = gridSizeX;
+            _gridSizeY = gridSizeY;
+            Generations = new List<Cell[,]>();
+            _initialCells = initialCells;
             PopulatedCells = 0;
-            GameGrid = new int[GridSizeX, GridSizeY];
+            Grid = new Cell[_gridSizeX, _gridSizeY];
+            for (int y = 0; y < _gridSizeY; y++)
+                for (int x = 0; x < _gridSizeX; x++)
+                    Grid[x, y] = new Cell();
 
-            // Initial population
-            random = new Random();
-            do
+                    // Initial population
+                    random = new Random();
+            while(PopulatedCells < _initialCells)
             {
-                int x = random.Next(0, GridSizeX);
-                int y = random.Next(0, GridSizeY);
-                if (GameGrid[x, y] < 1)
+                int x = random.Next(0, _gridSizeX);
+                int y = random.Next(0, _gridSizeY);
+                if (Grid[x, y].State == CELL_STATE.Empty)
                 {
-                    GameGrid[x, y] = 1;
+                    Grid[x, y].State = CELL_STATE.Alive;
                     PopulatedCells++;
                 }
-            } while (PopulatedCells < InitialCells);
+            } 
 
-            Generations.Add(GameGrid);
-            // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
-            //PrintToConsole();
+            Generations.Add(Grid);
         }
 
 
         // Check for amount of neighbours
-        private int CellHasNeighbours(int[,] grid, int x, int y)
+        private int CellHasNeighbours(Cell[,] grid, int x, int y)
         {
             int neighboursCount = 0;
 
             // Top neighbours; we don't check these for cells on the top row.
             if (y != 0)
             {
-                if (x != 0 && grid[x - 1, y - 1] > 0) neighboursCount++;              // Top-left
-                if (grid[x, y - 1] > 0) neighboursCount++;                            // Top-center
-                if (x != grid.GetLength(0) - 1 && grid[x + 1, y - 1] > 0) neighboursCount++;   // Top-right
+                if (x != 0 && grid[x - 1, y - 1].State > CELL_STATE.Empty) neighboursCount++;              // Top-left
+                if (grid[x, y - 1].State > CELL_STATE.Empty) neighboursCount++;                            // Top-center
+                if (x != grid.GetLength(0) - 1 && grid[x + 1, y - 1].State > CELL_STATE.Empty) neighboursCount++;   // Top-right
             }
 
             // Left-right neighbours; we don't check for the cells on the very first or last index in a row.
             if (x != 0 && x != grid.GetLength(0) - 1)
             {
-                if (grid[x - 1, y] > 0) neighboursCount++; // Left
-                if (grid[x + 1, y] > 0) neighboursCount++; // Right
+                if (grid[x - 1, y].State > 0) neighboursCount++; // Left
+                if (grid[x + 1, y].State > 0) neighboursCount++; // Right
             }
 
             // Bottom neighbours; not checking for cells on the last row.
             if (y != grid.GetLength(1) - 1)
             {
-                if (x != 0 && grid[x - 1, y + 1] > 0) neighboursCount++;              // Bottom-left
-                if (grid[x, y + 1] > 0) neighboursCount++;                            // Bottom-center
-                if (x != grid.GetLength(0) - 1 && grid[x + 1, y + 1] > 0) neighboursCount++;   // Bottom-right
+                if (x != 0 && grid[x - 1, y + 1].State > 0) neighboursCount++;              // Bottom-left
+                if (grid[x, y + 1].State > 0) neighboursCount++;                            // Bottom-center
+                if (x != grid.GetLength(0) - 1 && grid[x + 1, y + 1].State > 0) neighboursCount++;   // Bottom-right
             }
 
             return neighboursCount;
@@ -92,11 +95,11 @@ namespace GOL_2019
         {
 
             int cellNeighbours;
-            int[,] newGeneration = (int[,])GameGrid.Clone();
-            List<Cell> cellsToAlter = new List<Cell>();      
+            Cell[,] newGeneration = (Cell[,])Grid.Clone();
+            Cell[,] cellsToAlter = (Cell[,])Grid.Clone();
 
-            for (int y = 0; y < GridSizeY; y++)
-                for (int x = 0; x < GridSizeX; x++)
+            for (int y = 0; y < _gridSizeY; y++)
+                for (int x = 0; x < _gridSizeX; x++)
                 {
                     // Check the (up to) 8 immediately surrounding cells
                     cellNeighbours = CellHasNeighbours(newGeneration, x, y);
@@ -104,51 +107,22 @@ namespace GOL_2019
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
                     if (cellNeighbours < 2 || cellNeighbours > 3)
                     {
-                        cellsToAlter.Add(new Cell(x, y, false));
-                        //newGeneration[x, y] = 0;
-                        PopulatedCells--;
+                        cellsToAlter[x,y].State = CELL_STATE.Dead;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
-                    if (newGeneration[x, y] == 0 && cellNeighbours == 3)
+                    if (newGeneration[x, y].State == CELL_STATE.Empty || newGeneration[x, y].State == CELL_STATE.Dead && cellNeighbours == 3)
                     {
-                        cellsToAlter.Add(new Cell(x, y, true));
-                        //newGeneration[x, y] = 1;
-                        PopulatedCells++;
+                        cellsToAlter[x,y].State = CELL_STATE.Alive;
                     }
                 }
-
-                foreach(Cell cell in cellsToAlter)
-                {
-                    newGeneration[cell.x, cell.y] = Convert.ToInt32(cell.Alive);
-                }
-
-            GameGrid = newGeneration;
+     
+                newGeneration = cellsToAlter;
+                
+            Grid = newGeneration;
             Generations.Add(newGeneration);  // Save current generation before the next iteration
                                              // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
                                              //PrintToConsole(false);
-        }
-
-
-        // Alternate form of displaying output. Project Settings -> Output type = Console will open a console window alongside the WinForm
-        public void PrintToConsole(bool clearConsole = true)
-        {
-            // Unless we pass false, we clear the console before printing the current generation.
-            if (clearConsole) Console.Clear();
-
-            Console.WriteLine($"----- Printing {GridSizeX}*{GridSizeY} grid ({(GridSizeX * GridSizeY )} cells). Generation: {Generations.Count()}, Cells: {PopulatedCells} -----");
-            string row = "";
-            for (int y = 0; y < GridSizeY; y++)
-            {
-                Console.WriteLine("--------------------------------------------------------");
-                for (int x = 0; x < GridSizeX; x++)
-                {
-                    row += $" | {GameGrid[x, y]} |";
-                    if (x != GridSizeX) row += " ";
-                }
-                Console.WriteLine(row);
-                row = "";
-            }
         }
     }
 }
