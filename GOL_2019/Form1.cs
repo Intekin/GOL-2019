@@ -29,7 +29,7 @@ namespace GOL_2019
             nud_X.Value = GameSettings.Width;
             nud_Y.Value = GameSettings.Height;
 
-            gameView.InitGameView(PB_MainView, (int)nud_X.Value, (int)nud_Y.Value);
+            gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
 
             //Datasource
             //cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GameMode));
@@ -47,6 +47,7 @@ namespace GOL_2019
 
             gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, 30);
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
+            gameView.UpdateGameView(gameLogic.Generations.Last(), PB_MainView);
 
             currentGame = new GameData();
             currentGame.Generations = gameLogic.Generations;

@@ -23,7 +23,7 @@ namespace GOL_2019
         private int _gridSizeX, _gridSizeY;       
         private int _initialCells;
 
-        public int PopulatedCells { get; private set; }
+        private int _populatedCells;
         public Cell[,] Grid { get; private set; }            
 
         public List<Cell[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
@@ -35,7 +35,7 @@ namespace GOL_2019
             _gridSizeY = gridSizeY;
             Generations = new List<Cell[,]>();
             _initialCells = initialCells;
-            PopulatedCells = 0;
+            _populatedCells = 0;
             Grid = new Cell[_gridSizeX, _gridSizeY];
             for (int y = 0; y < _gridSizeY; y++)
                 for (int x = 0; x < _gridSizeX; x++)
@@ -43,14 +43,14 @@ namespace GOL_2019
 
                     // Initial population
                     random = new Random();
-            while(PopulatedCells < _initialCells)
+            while(_populatedCells < _initialCells)
             {
                 int x = random.Next(0, _gridSizeX);
                 int y = random.Next(0, _gridSizeY);
                 if (Grid[x, y].State == CELL_STATE.Empty)
                 {
                     Grid[x, y].State = CELL_STATE.Alive;
-                    PopulatedCells++;
+                    _populatedCells++;
                 }
             } 
 
@@ -62,28 +62,29 @@ namespace GOL_2019
         private int CellHasNeighbours(Cell[,] grid, int x, int y)
         {
             int neighboursCount = 0;
+            CELL_STATE state = CELL_STATE.Alive;
 
             // Top neighbours; we don't check these for cells on the top row.
             if (y != 0)
             {
-                if (x != 0 && grid[x - 1, y - 1].State > CELL_STATE.Empty) neighboursCount++;              // Top-left
-                if (grid[x, y - 1].State > CELL_STATE.Empty) neighboursCount++;                            // Top-center
-                if (x != grid.GetLength(0) - 1 && grid[x + 1, y - 1].State > CELL_STATE.Empty) neighboursCount++;   // Top-right
+                if (x != 0 && grid[x - 1, y - 1].State == state) neighboursCount++;              // Top-left
+                if (grid[x, y - 1].State == state) neighboursCount++;                            // Top-center
+                if (x != grid.GetLength(0) - 1 && grid[x + 1, y - 1].State == state) neighboursCount++;   // Top-right
             }
 
             // Left-right neighbours; we don't check for the cells on the very first or last index in a row.
             if (x != 0 && x != grid.GetLength(0) - 1)
             {
-                if (grid[x - 1, y].State > 0) neighboursCount++; // Left
-                if (grid[x + 1, y].State > 0) neighboursCount++; // Right
+                if (grid[x - 1, y].State == state) neighboursCount++; // Left
+                if (grid[x + 1, y].State == state) neighboursCount++; // Right
             }
 
             // Bottom neighbours; not checking for cells on the last row.
             if (y != grid.GetLength(1) - 1)
             {
-                if (x != 0 && grid[x - 1, y + 1].State > 0) neighboursCount++;              // Bottom-left
-                if (grid[x, y + 1].State > 0) neighboursCount++;                            // Bottom-center
-                if (x != grid.GetLength(0) - 1 && grid[x + 1, y + 1].State > 0) neighboursCount++;   // Bottom-right
+                if (x != 0 && grid[x - 1, y + 1].State == state) neighboursCount++;              // Bottom-left
+                if (grid[x, y + 1].State == state) neighboursCount++;                            // Bottom-center
+                if (x != grid.GetLength(0) - 1 && grid[x + 1, y + 1].State == state) neighboursCount++;   // Bottom-right
             }
 
             return neighboursCount;
@@ -105,7 +106,7 @@ namespace GOL_2019
                     cellNeighbours = CellHasNeighbours(newGeneration, x, y);
 
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
-                    if (cellNeighbours < 2 || cellNeighbours > 3)
+                    if (cellNeighbours < 2 || cellNeighbours > 3 && cellsToAlter[x, y].State == CELL_STATE.Alive)
                     {
                         cellsToAlter[x,y].State = CELL_STATE.Dead;
                     }
