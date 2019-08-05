@@ -56,8 +56,9 @@ namespace GOL_2019
                     myBitmap.SetPixel(X, Y, color);
                 }
             }
-            picture.Image = myBitmap;
+            picture.Image = myBitmap;     
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
+           
         }
     }
 }

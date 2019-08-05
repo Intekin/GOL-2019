@@ -11,7 +11,7 @@ namespace GOL_2019
         public static GAMEMODE GameMode { get; set; } = GAMEMODE.Standard;
 
         //Set default as 100;
-        public static int Width { get; set; } = 10;
-        public static int Height { get; set; } = 10;
+        public static int Width { get; set; } = 100;
+        public static int Height { get; set; } = 100;
     }
 }

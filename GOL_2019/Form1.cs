@@ -45,7 +45,7 @@ namespace GOL_2019
             GameSettings.Width = (int)nud_X.Value;
             GameSettings.Height = (int)nud_Y.Value;
 
-            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, 30);
+            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, 300);
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
             gameView.UpdateGameView(gameLogic.Generations.Last(), PB_MainView);
 

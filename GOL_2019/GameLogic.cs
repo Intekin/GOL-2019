@@ -18,8 +18,7 @@ namespace GOL_2019
     }
 
     class GameLogic
-    {
-                
+    {              
         private int _gridSizeX, _gridSizeY;       
         private int _initialCells;
 
@@ -106,13 +105,13 @@ namespace GOL_2019
                     cellNeighbours = CellHasNeighbours(newGeneration, x, y);
 
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
-                    if (cellNeighbours < 2 || cellNeighbours > 3 && cellsToAlter[x, y].State == CELL_STATE.Alive)
+                    if ((cellNeighbours < 2 || cellNeighbours > 3) && cellsToAlter[x, y].State == CELL_STATE.Alive)
                     {
                         cellsToAlter[x,y].State = CELL_STATE.Dead;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
-                    if (newGeneration[x, y].State == CELL_STATE.Empty || newGeneration[x, y].State == CELL_STATE.Dead && cellNeighbours == 3)
+                    if ((newGeneration[x, y].State == CELL_STATE.Empty || newGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
                     {
                         cellsToAlter[x,y].State = CELL_STATE.Alive;
                     }
