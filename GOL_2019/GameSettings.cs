@@ -13,5 +13,7 @@ namespace GOL_2019
         //Set default as 100;
         public static int Width { get; set; } = 100;
         public static int Height { get; set; } = 100;
+        public static int InitialCellsAlive { get; set; } = 50;
+        public static bool ShowDead { get; set; } = true;
     }
 }

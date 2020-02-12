@@ -29,13 +29,13 @@ namespace GOL_2019
             nud_X.Value = GameSettings.Width;
             nud_Y.Value = GameSettings.Height;
 
+            nud_CellsAlive.Value = GameSettings.InitialCellsAlive;
+
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
 
             //Datasource
             //cb_GameMode.DataSource = Enum.GetValues(typeof(GameSettings.GameMode));
             cb_GameMode.SelectedItem = GameSettings.GameMode;
-
-
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -44,8 +44,9 @@ namespace GOL_2019
 
             GameSettings.Width = (int)nud_X.Value;
             GameSettings.Height = (int)nud_Y.Value;
+            GameSettings.InitialCellsAlive = (int)nud_CellsAlive.Value;
 
-            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, 300);
+            gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, GameSettings.InitialCellsAlive);
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
             gameView.UpdateGameView(gameLogic.Generations.Last(), PB_MainView);
 
@@ -150,6 +151,12 @@ namespace GOL_2019
         {
             Application.Exit();
         }
+
+        private void cb_showDead_CheckedChanged(object sender, EventArgs e)
+        {
+            GameSettings.ShowDead = cb_showDead.Checked;
+        }
+
 
         //private void cb_GameMode_SelectedIndexChanged(object sender, EventArgs e)
         //{

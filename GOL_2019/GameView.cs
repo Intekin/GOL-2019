@@ -51,11 +51,19 @@ namespace GOL_2019
                     }
                     if (currentGeneration[X, Y].State == CELL_STATE.Dead)
                     {
-                        color = Color.Gray;
+                        if (!GameSettings.ShowDead)
+                        {
+                            color = Color.White;
+                        }
+                        else
+                        {
+                            color = Color.Gray;
+                        }
                     }
                     myBitmap.SetPixel(X, Y, color);
                 }
             }
+            
             picture.Image = myBitmap;     
             picture.SizeMode = PictureBoxSizeMode.StretchImage;
            
