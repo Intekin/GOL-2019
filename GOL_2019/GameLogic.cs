@@ -72,11 +72,10 @@ namespace GOL_2019
             }
 
             // Left-right neighbours; we don't check for the cells on the very first or last index in a row.
-            if (x != 0 && x != grid.GetLength(0) - 1)
-            {
-                if (grid[x - 1, y].State == state) neighboursCount++; // Left
-                if (grid[x + 1, y].State == state) neighboursCount++; // Right
-            }
+            
+            if (x != 0 && grid[x - 1, y].State == state) neighboursCount++; // Left
+            if (x != grid.GetLength(0) - 1 && grid[x + 1, y].State == state) neighboursCount++; // Right
+            
 
             // Bottom neighbours; not checking for cells on the last row.
             if (y != grid.GetLength(1) - 1)
