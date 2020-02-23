@@ -94,32 +94,32 @@ namespace GOL_2019
         {
 
             int cellNeighbours;
-            Cell[,] newGeneration = (Cell[,])Grid.Clone();
+            Cell[,] oldGeneration = (Cell[,])Grid.Clone();
             Cell[,] cellsToAlter = (Cell[,])Grid.Clone();
 
             for (int y = 0; y < _gridSizeY; y++)
                 for (int x = 0; x < _gridSizeX; x++)
                 {
                     // Check the (up to) 8 immediately surrounding cells
-                    cellNeighbours = CellHasNeighbours(newGeneration, x, y);
+                    cellNeighbours = CellHasNeighbours(oldGeneration, x, y);
 
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
-                    if ((cellNeighbours < 2 || cellNeighbours > 3) && cellsToAlter[x, y].State == CELL_STATE.Alive)
+                    if ((cellNeighbours < 2 || cellNeighbours > 3) && oldGeneration[x, y].State == CELL_STATE.Alive)
                     {
                         cellsToAlter[x,y].State = CELL_STATE.Dead;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
-                    if ((newGeneration[x, y].State == CELL_STATE.Empty || newGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
+                    if ((oldGeneration[x, y].State == CELL_STATE.Empty || oldGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
                     {
                         cellsToAlter[x,y].State = CELL_STATE.Alive;
                     }
                 }
      
-                newGeneration = cellsToAlter;
+                oldGeneration = cellsToAlter;
                 
-            Grid = newGeneration;
-            Generations.Add(newGeneration);  // Save current generation before the next iteration
+            Grid = (Cell[,])oldGeneration.Clone();
+            Generations.Add(oldGeneration);  // Save current generation before the next iteration
                                              // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
                                              //PrintToConsole(false);
         }

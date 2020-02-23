@@ -9,24 +9,45 @@ namespace GOL_2019
     {
         int Width = 320;
         int Height = 240;
+        int Size = 10;
 
         public void InitGameView(PictureBox picture, int width, int height)
         {
-            Width = width;
-            Height = height;
+            Width = width * Size;
+            Height = height * Size;
+
             // Create a Bitmap object from a file.
             Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
-
+            Color color = new Color();
             // Set each pixel in myBitmap to black.
-            for (int X = 0; X < myBitmap.Width; X++)
+            int xCounter = 1, yCounter = 1;
+            for (int Y = 0; Y < myBitmap.Height; Y++)
             {
-                for (int Y = 0; Y < myBitmap.Height; Y++)
+                for (int X = 0; X < myBitmap.Width; X++)
+                {            
+                    if(X == xCounter * Size)
+                    {
+                        xCounter++;
+                        color = Color.Black;
+                    }
+                    else if(Y == yCounter * Size)
+                    {
+                        color = Color.Black;
+                    }
+                    else
+                    {
+                        color = Color.White;
+                    }
+                    myBitmap.SetPixel(X, Y, color);
+                }
+                xCounter = 1;
+                if (Y == yCounter * Size)
                 {
-                    myBitmap.SetPixel(X, Y, Color.White);
+                    yCounter++;
                 }
             }
             picture.Image = myBitmap;
-            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            picture.SizeMode = PictureBoxSizeMode.Normal;
             
         }
 
@@ -35,21 +56,22 @@ namespace GOL_2019
             // Create a Bitmap object from a file.
             Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
             Color color = new Color();
+            int xCounter = 1, yCounter = 1;
             // Set each pixel in myBitmap to black.
-            for (int X = 0; X < myBitmap.Width; X++)
+            for (int Y = 0; Y < myBitmap.Height; Y++)
             {
-                for (int Y = 0; Y < myBitmap.Height; Y++)
+                for (int X = 0; X < myBitmap.Width; X++)
                 {
 
-                    if(currentGeneration[X, Y].State == CELL_STATE.Empty)
+                    if(currentGeneration[(int)(X / 10d),(int)(Y/10d)].State == CELL_STATE.Empty)
                     {
                         color = Color.White;
                     }
-                    if (currentGeneration[X, Y].State == CELL_STATE.Alive)
+                    if (currentGeneration[(int)(X / 10d), (int)(Y / 10d)].State == CELL_STATE.Alive)
                     {
                         color = Color.Black;
                     }
-                    if (currentGeneration[X, Y].State == CELL_STATE.Dead)
+                    if (currentGeneration[(int)(X / 10d), (int)(Y / 10d)].State == CELL_STATE.Dead)
                     {
                         if (!GameSettings.ShowDead)
                         {
@@ -60,12 +82,28 @@ namespace GOL_2019
                             color = Color.Gray;
                         }
                     }
+
+                    if (X == xCounter * 10)
+                    {
+                        xCounter++;
+                        color = Color.Black;
+                    }
+                    else if (Y == yCounter * 10)
+                    {
+                        color = Color.Black;
+                    }
+
                     myBitmap.SetPixel(X, Y, color);
+                }
+                xCounter = 1;
+                if (Y == yCounter * 10)
+                {
+                    yCounter++;
                 }
             }
             
             picture.Image = myBitmap;     
-            picture.SizeMode = PictureBoxSizeMode.StretchImage;
+            picture.SizeMode = PictureBoxSizeMode.Normal;
            
         }
     }

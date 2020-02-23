@@ -39,14 +39,14 @@
             this.btn_StartNewGame = new System.Windows.Forms.Button();
             this.btn_NextGeneration = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.arkivToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PB_MainView = new System.Windows.Forms.PictureBox();
-            this.cb_showDead = new System.Windows.Forms.CheckBox();
             this.nud_CellsAlive = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_New = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Options = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_About = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_X)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -138,10 +138,10 @@
             // 
             // btn_StartNewGame
             // 
-            this.btn_StartNewGame.Location = new System.Drawing.Point(683, 31);
+            this.btn_StartNewGame.Location = new System.Drawing.Point(725, 31);
             this.btn_StartNewGame.Margin = new System.Windows.Forms.Padding(2);
             this.btn_StartNewGame.Name = "btn_StartNewGame";
-            this.btn_StartNewGame.Size = new System.Drawing.Size(89, 28);
+            this.btn_StartNewGame.Size = new System.Drawing.Size(50, 28);
             this.btn_StartNewGame.TabIndex = 6;
             this.btn_StartNewGame.Text = "Start";
             this.btn_StartNewGame.UseVisualStyleBackColor = true;
@@ -153,9 +153,9 @@
             this.btn_NextGeneration.Location = new System.Drawing.Point(776, 31);
             this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NextGeneration.Name = "btn_NextGeneration";
-            this.btn_NextGeneration.Size = new System.Drawing.Size(96, 28);
+            this.btn_NextGeneration.Size = new System.Drawing.Size(50, 28);
             this.btn_NextGeneration.TabIndex = 3;
-            this.btn_NextGeneration.Text = "Next Generation";
+            this.btn_NextGeneration.Text = "Next";
             this.btn_NextGeneration.UseVisualStyleBackColor = true;
             this.btn_NextGeneration.Click += new System.EventHandler(this.btn_NextGeneration_Click);
             // 
@@ -163,41 +163,14 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.arkivToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.menuToolStripMenuItem,
+            this.TSMI_About});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(875, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // arkivToolStripMenuItem
-            // 
-            this.arkivToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.arkivToolStripMenuItem.Name = "arkivToolStripMenuItem";
-            this.arkivToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.arkivToolStripMenuItem.Text = "Arkiv";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // PB_MainView
             // 
@@ -211,25 +184,18 @@
             this.PB_MainView.TabIndex = 0;
             this.PB_MainView.TabStop = false;
             // 
-            // cb_showDead
-            // 
-            this.cb_showDead.Checked = true;
-            this.cb_showDead.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_showDead.Location = new System.Drawing.Point(431, 37);
-            this.cb_showDead.Name = "cb_showDead";
-            this.cb_showDead.Size = new System.Drawing.Size(95, 24);
-            this.cb_showDead.TabIndex = 0;
-            this.cb_showDead.Text = "Show Dead";
-            this.cb_showDead.CheckedChanged += new System.EventHandler(this.cb_showDead_CheckedChanged);
-            // 
             // nud_CellsAlive
             // 
             this.nud_CellsAlive.Location = new System.Drawing.Point(375, 40);
+            this.nud_CellsAlive.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
             this.nud_CellsAlive.Name = "nud_CellsAlive";
             this.nud_CellsAlive.Size = new System.Drawing.Size(50, 20);
             this.nud_CellsAlive.TabIndex = 14;
             this.nud_CellsAlive.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nud_CellsAlive.Maximum = int.MaxValue;
             // 
             // label1
             // 
@@ -240,6 +206,43 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Cells:";
             // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_New,
+            this.TSMI_Options,
+            this.TSMI_Exit});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.menuToolStripMenuItem.Text = "_Menu";
+            // 
+            // TSMI_New
+            // 
+            this.TSMI_New.Name = "TSMI_New";
+            this.TSMI_New.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_New.Text = "_New";
+            // 
+            // TSMI_Options
+            // 
+            this.TSMI_Options.Name = "TSMI_Options";
+            this.TSMI_Options.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_Options.Text = "Options";
+            this.TSMI_Options.Click += new System.EventHandler(this.TSMI_Options_Click);
+            // 
+            // TSMI_Exit
+            // 
+            this.TSMI_Exit.Name = "TSMI_Exit";
+            this.TSMI_Exit.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_Exit.Text = "Exit";
+            this.TSMI_Exit.Click += new System.EventHandler(this.TSMI_Exit_Click);
+            // 
+            // TSMI_About
+            // 
+            this.TSMI_About.Name = "TSMI_About";
+            this.TSMI_About.Size = new System.Drawing.Size(52, 20);
+            this.TSMI_About.Text = "About";
+            this.TSMI_About.Click += new System.EventHandler(this.TSMI_About_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,7 +250,6 @@
             this.ClientSize = new System.Drawing.Size(875, 522);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_CellsAlive);
-            this.Controls.Add(this.cb_showDead);
             this.Controls.Add(this.btn_NextGeneration);
             this.Controls.Add(this.PB_MainView);
             this.Controls.Add(this.label5);
@@ -262,7 +264,7 @@
             this.Controls.Add(this.cb_GameMode);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "GOL";
+            this.Text = "Game of Life - 2020";
             ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_X)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -280,10 +282,6 @@
         private System.Windows.Forms.Button btn_StartNewGame;
         private System.Windows.Forms.Button btn_NextGeneration;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem arkivToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cb_GameMode;
         private System.Windows.Forms.Label label5;
@@ -291,8 +289,12 @@
         private System.Windows.Forms.NumericUpDown nud_Y;
         private System.Windows.Forms.NumericUpDown nud_X;
         private System.Windows.Forms.PictureBox PB_MainView;
-        private System.Windows.Forms.CheckBox cb_showDead;
         private System.Windows.Forms.NumericUpDown nud_CellsAlive;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_New;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Options;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Exit;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_About;
     }
 }

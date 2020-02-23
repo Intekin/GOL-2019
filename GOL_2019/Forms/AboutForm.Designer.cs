@@ -45,11 +45,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 9);
+            this.label1.Location = new System.Drawing.Point(33, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 65);
+            this.label1.Size = new System.Drawing.Size(156, 65);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Made by:\r\nSimon\r\nSara\r\nLeif\r\nChristoffer";
+            this.label1.Text = "Mutated beyond recognition by:\r\nChristoffer\r\n\r\nOriginally created by:\r\nSimon, Sar" +
+    "a, Leif, Christoffer";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // About

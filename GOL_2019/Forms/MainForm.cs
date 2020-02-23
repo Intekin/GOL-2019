@@ -147,14 +147,21 @@ namespace GOL_2019
         //    }
         //}
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TSMI_Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void cb_showDead_CheckedChanged(object sender, EventArgs e)
+        private void TSMI_Options_Click(object sender, EventArgs e)
         {
-            GameSettings.ShowDead = cb_showDead.Checked;
+            OptionsForm options = new OptionsForm();
+            options.Show();
+        }
+
+        private void TSMI_About_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.Show();
         }
 
 
