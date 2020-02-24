@@ -1,6 +1,9 @@
-﻿using System;
+﻿using GOL_2019.Utility;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GOL_2019
@@ -17,20 +20,20 @@ namespace GOL_2019
             Height = height * Size;
 
             // Create a Bitmap object from a file.
-            Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
+            DirectBitmap myBitmap = new DirectBitmap(Width, Height);
             Color color = new Color();
             // Set each pixel in myBitmap to black.
             int xCounter = 1, yCounter = 1;
             for (int Y = 0; Y < myBitmap.Height; Y++)
             {
                 for (int X = 0; X < myBitmap.Width; X++)
-                {            
-                    if(X == xCounter * Size)
+                {
+                    if (X == xCounter * Size)
                     {
                         xCounter++;
                         color = Color.Black;
                     }
-                    else if(Y == yCounter * Size)
+                    else if (Y == yCounter * Size)
                     {
                         color = Color.Black;
                     }
@@ -46,15 +49,15 @@ namespace GOL_2019
                     yCounter++;
                 }
             }
-            picture.Image = myBitmap;
+
+            picture.Image = myBitmap.Bitmap;
             picture.SizeMode = PictureBoxSizeMode.Normal;
-            
         }
 
         public void UpdateGameView(Cell[,] currentGeneration, PictureBox picture)
         {
             // Create a Bitmap object from a file.
-            Bitmap myBitmap = new Bitmap(Width, Height, PixelFormat.Format32bppRgb);
+            DirectBitmap myBitmap = new DirectBitmap(Width, Height);
             Color color = new Color();
             int xCounter = 1, yCounter = 1;
             // Set each pixel in myBitmap to black.
@@ -62,8 +65,7 @@ namespace GOL_2019
             {
                 for (int X = 0; X < myBitmap.Width; X++)
                 {
-
-                    if(currentGeneration[(int)(X / 10d),(int)(Y/10d)].State == CELL_STATE.Empty)
+                    if (currentGeneration[(int)(X / 10d), (int)(Y / 10d)].State == CELL_STATE.Empty)
                     {
                         color = Color.White;
                     }
@@ -101,10 +103,10 @@ namespace GOL_2019
                     yCounter++;
                 }
             }
-            
-            picture.Image = myBitmap;     
+
+            picture.Image = myBitmap.Bitmap;
             picture.SizeMode = PictureBoxSizeMode.Normal;
-           
+
         }
-    }
+    }   
 }
