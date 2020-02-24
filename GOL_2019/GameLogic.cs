@@ -1,29 +1,17 @@
-﻿using System;
+﻿using GOL_2019.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace GOL_2019
-{   
-    public enum CELL_STATE {Empty, Dead, Alive}
-
-    public class Cell
-    {
-        public CELL_STATE State;
-
-        public Cell() { State = CELL_STATE.Empty; }
-        public Cell(CELL_STATE state)
-        {
-          State = state;
-        }
-    }
-
+{
     class GameLogic
-    {              
-        private int _gridSizeX, _gridSizeY;       
+    {
+        private int _gridSizeX, _gridSizeY;
         private int _initialCells;
 
         private int _populatedCells;
-        public Cell[,] Grid { get; private set; }            
+        public Cell[,] Grid { get; private set; }
 
         public List<Cell[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
         private Random random;
@@ -40,9 +28,9 @@ namespace GOL_2019
                 for (int x = 0; x < _gridSizeX; x++)
                     Grid[x, y] = new Cell();
 
-                    // Initial population
-                    random = new Random();
-            while(_populatedCells < _initialCells)
+            // Initial population
+            random = new Random();
+            while (_populatedCells < _initialCells)
             {
                 int x = random.Next(0, _gridSizeX);
                 int y = random.Next(0, _gridSizeY);
@@ -51,7 +39,7 @@ namespace GOL_2019
                     Grid[x, y].State = CELL_STATE.Alive;
                     _populatedCells++;
                 }
-            } 
+            }
 
             Generations.Add(Grid);
         }
@@ -72,10 +60,10 @@ namespace GOL_2019
             }
 
             // Left-right neighbours; we don't check for the cells on the very first or last index in a row.
-            
+
             if (x != 0 && grid[x - 1, y].State == state) neighboursCount++; // Left
             if (x != grid.GetLength(0) - 1 && grid[x + 1, y].State == state) neighboursCount++; // Right
-            
+
 
             // Bottom neighbours; not checking for cells on the last row.
             if (y != grid.GetLength(1) - 1)
@@ -106,22 +94,27 @@ namespace GOL_2019
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
                     if ((cellNeighbours < 2 || cellNeighbours > 3) && oldGeneration[x, y].State == CELL_STATE.Alive)
                     {
-                        cellsToAlter[x,y].State = CELL_STATE.Dead;
+                        oldGeneration[x, y].NextState = CELL_STATE.Dead;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
-                    if ((oldGeneration[x, y].State == CELL_STATE.Empty || oldGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
+                    else if ((oldGeneration[x, y].State == CELL_STATE.Empty || oldGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
                     {
-                        cellsToAlter[x,y].State = CELL_STATE.Alive;
+                        oldGeneration[x, y].NextState = CELL_STATE.Alive;
                     }
+                    else
+                    {
+                        oldGeneration[x, y].NextState = oldGeneration[x, y].State;
+                    }
+
                 }
-     
-                oldGeneration = cellsToAlter;
-                
+
+            foreach(var cell in oldGeneration)
+            {
+                cell.ToggleState();
+            }
+
             Grid = (Cell[,])oldGeneration.Clone();
-            Generations.Add(oldGeneration);  // Save current generation before the next iteration
-                                             // Används medans UI-delen inte är färdig. Project Settings -> Output type = Console
-                                             //PrintToConsole(false);
         }
     }
 }
