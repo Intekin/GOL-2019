@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace GOL_2019
 {
-    class GameView
+    public class GameView
     {
         int Width = 320;
         int Height = 240;
@@ -27,19 +27,21 @@ namespace GOL_2019
             {
                 for (int X = 0; X < myBitmap.Width; X++)
                 {
-                    if (X == xCounter * Size)
+                    color = Color.White;
+
+                    if (GameSettings.ShowGrid)
                     {
-                        xCounter++;
-                        color = Color.Black;
+                        if (X == xCounter * Size)
+                        {
+                            xCounter++;
+                            color = Color.Black;
+                        }
+                        else if (Y == yCounter * Size)
+                        {
+                            color = Color.Black;
+                        }
                     }
-                    else if (Y == yCounter * Size)
-                    {
-                        color = Color.Black;
-                    }
-                    else
-                    {
-                        color = Color.White;
-                    }
+
                     myBitmap.SetPixel(X, Y, color);
                 }
                 xCounter = 1;
@@ -82,15 +84,17 @@ namespace GOL_2019
                             color = Color.Gray;
                         }
                     }
-
-                    if (X == xCounter * 10)
+                    if (GameSettings.ShowGrid)
                     {
-                        xCounter++;
-                        color = Color.Black;
-                    }
-                    else if (Y == yCounter * 10)
-                    {
-                        color = Color.Black;
+                        if (X == xCounter * 10)
+                        {
+                            xCounter++;
+                            color = Color.Black;
+                        }
+                        else if (Y == yCounter * 10)
+                        {
+                            color = Color.Black;
+                        }
                     }
 
                     myBitmap.SetPixel(X, Y, color);

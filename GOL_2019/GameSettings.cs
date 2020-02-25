@@ -10,10 +10,10 @@ namespace GOL_2019
     {       
         public static GAMEMODE GameMode { get; set; } = GAMEMODE.Standard;
 
-        //Set default as 100;
         public static int Width { get; set; } = 120;
         public static int Height { get; set; } = 80;
-        public static int InitialCellsAlive { get; set; } = 50;
+        public static int InitialCellsAlive { get; set; } = 1000;
         public static bool ShowDead { get; set; } = false;
+        public static bool ShowGrid { get; set; } = true;
     }
 }

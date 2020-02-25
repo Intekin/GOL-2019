@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.CB_ShowDead = new System.Windows.Forms.CheckBox();
+            this.CB_ShowGrid = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // CB_ShowDead
@@ -42,11 +43,23 @@
             this.CB_ShowDead.UseVisualStyleBackColor = true;
             this.CB_ShowDead.CheckedChanged += new System.EventHandler(this.CB_ShowDead_CheckedChanged);
             // 
+            // CB_ShowGrid
+            // 
+            this.CB_ShowGrid.AutoSize = true;
+            this.CB_ShowGrid.Location = new System.Drawing.Point(12, 35);
+            this.CB_ShowGrid.Name = "CB_ShowGrid";
+            this.CB_ShowGrid.Size = new System.Drawing.Size(75, 17);
+            this.CB_ShowGrid.TabIndex = 1;
+            this.CB_ShowGrid.Text = "Show Grid";
+            this.CB_ShowGrid.UseVisualStyleBackColor = true;
+            this.CB_ShowGrid.CheckedChanged += new System.EventHandler(this.CB_ShowGrid_CheckedChanged);
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 221);
+            this.Controls.Add(this.CB_ShowGrid);
             this.Controls.Add(this.CB_ShowDead);
             this.Name = "OptionsForm";
             this.Text = "Game of Life - Options";
@@ -58,5 +71,6 @@
         #endregion
 
         private System.Windows.Forms.CheckBox CB_ShowDead;
+        private System.Windows.Forms.CheckBox CB_ShowGrid;
     }
 }

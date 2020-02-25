@@ -18,11 +18,18 @@ namespace GOL_2019
             InitializeComponent();
 
             CB_ShowDead.Checked = GameSettings.ShowDead;
+            CB_ShowGrid.Checked = GameSettings.ShowGrid;
         }
 
         private void CB_ShowDead_CheckedChanged(object sender, EventArgs e)
         {
             GameSettings.ShowDead = CB_ShowDead.Checked;
+            
+        }
+
+        private void CB_ShowGrid_CheckedChanged(object sender, EventArgs e)
+        {
+            GameSettings.ShowGrid = CB_ShowGrid.Checked;
         }
     }
 }

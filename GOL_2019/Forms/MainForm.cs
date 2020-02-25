@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using DatabaseCL;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.Linq;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace GOL_2019
 {
@@ -12,8 +12,6 @@ namespace GOL_2019
     {
         GameLogic gameLogic;
         GameView gameView;
-        GameData currentGame;
-        Timer loadingTimer;
 
         public Form1()
         {
@@ -23,7 +21,6 @@ namespace GOL_2019
 
         private void InitBaseSettings()
         {
-            loadingTimer = new Timer();
             gameView = new GameView();
 
             nud_X.Value = GameSettings.Width;
@@ -32,8 +29,6 @@ namespace GOL_2019
             nud_CellsAlive.Value = GameSettings.InitialCellsAlive;
 
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
-
-            cb_GameMode.SelectedItem = GameSettings.GameMode;
         }
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
@@ -48,7 +43,12 @@ namespace GOL_2019
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
             gameView.UpdateGameView(gameLogic.Grid ,PB_MainView);
 
-            currentGame = new GameData();
+            while (true)
+            {
+                gameLogic.Iterate();
+                gameView.UpdateGameView(gameLogic.Grid, PB_MainView);
+            }
+
         }
 
         private void btn_NextGeneration_Click(object sender, EventArgs e)
