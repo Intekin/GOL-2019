@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using DatabaseCL;
+using GOL_2019.Utility;
 
 namespace GOL_2019
 {

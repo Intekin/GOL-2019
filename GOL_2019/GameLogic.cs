@@ -13,14 +13,12 @@ namespace GOL_2019
         private int _populatedCells;
         public Cell[,] Grid { get; private set; }
 
-        public List<Cell[,]> Generations;  // Each GameGrid (or "generation") is pushed here each iteration to save the entirety of the games progress.
         private Random random;
 
         public GameLogic(int gridSizeX, int gridSizeY, int initialCells)
         {
             _gridSizeX = gridSizeX;
             _gridSizeY = gridSizeY;
-            Generations = new List<Cell[,]>();
             _initialCells = initialCells;
             _populatedCells = 0;
             Grid = new Cell[_gridSizeX, _gridSizeY];
@@ -40,8 +38,6 @@ namespace GOL_2019
                     _populatedCells++;
                 }
             }
-
-            Generations.Add(Grid);
         }
 
 
@@ -80,41 +76,34 @@ namespace GOL_2019
         // Save current generation, calculate the next.
         public void Iterate()
         {
-
             int cellNeighbours;
-            Cell[,] oldGeneration = (Cell[,])Grid.Clone();
-            Cell[,] cellsToAlter = (Cell[,])Grid.Clone();
-
             for (int y = 0; y < _gridSizeY; y++)
                 for (int x = 0; x < _gridSizeX; x++)
                 {
                     // Check the (up to) 8 immediately surrounding cells
-                    cellNeighbours = CellHasNeighbours(oldGeneration, x, y);
+                    cellNeighbours = CellHasNeighbours(Grid, x, y);
 
                     // Less than 2; die of loneliness, greater than 3; die of overpopulation.
-                    if ((cellNeighbours < 2 || cellNeighbours > 3) && oldGeneration[x, y].State == CELL_STATE.Alive)
+                    if ((cellNeighbours < 2 || cellNeighbours > 3) && Grid[x, y].State == CELL_STATE.Alive)
                     {
-                        oldGeneration[x, y].NextState = CELL_STATE.Dead;
+                        Grid[x, y].NextState = CELL_STATE.Dead;
                     }
 
                     // Empty cell with 3; now a not-so-empty cell.
-                    else if ((oldGeneration[x, y].State == CELL_STATE.Empty || oldGeneration[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
+                    else if ((Grid[x, y].State == CELL_STATE.Empty || Grid[x, y].State == CELL_STATE.Dead) && cellNeighbours == 3)
                     {
-                        oldGeneration[x, y].NextState = CELL_STATE.Alive;
+                        Grid[x, y].NextState = CELL_STATE.Alive;
                     }
                     else
                     {
-                        oldGeneration[x, y].NextState = oldGeneration[x, y].State;
+                        Grid[x, y].NextState = Grid[x, y].State;
                     }
-
                 }
 
-            foreach(var cell in oldGeneration)
+            foreach(var cell in Grid)
             {
                 cell.ToggleState();
             }
-
-            Grid = (Cell[,])oldGeneration.Clone();
         }
     }
 }

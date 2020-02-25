@@ -13,16 +13,15 @@ namespace GOL_2019
         int Width = 320;
         int Height = 240;
         int Size = 10;
+        DirectBitmap myBitmap;
 
         public void InitGameView(PictureBox picture, int width, int height)
         {
             Width = width * Size;
             Height = height * Size;
-
-            // Create a Bitmap object from a file.
-            DirectBitmap myBitmap = new DirectBitmap(Width, Height);
+            myBitmap = new DirectBitmap(Width, Height);
             Color color = new Color();
-            // Set each pixel in myBitmap to black.
+
             int xCounter = 1, yCounter = 1;
             for (int Y = 0; Y < myBitmap.Height; Y++)
             {
@@ -57,7 +56,6 @@ namespace GOL_2019
         public void UpdateGameView(Cell[,] currentGeneration, PictureBox picture)
         {
             // Create a Bitmap object from a file.
-            DirectBitmap myBitmap = new DirectBitmap(Width, Height);
             Color color = new Color();
             int xCounter = 1, yCounter = 1;
             // Set each pixel in myBitmap to black.
@@ -106,7 +104,6 @@ namespace GOL_2019
 
             picture.Image = myBitmap.Bitmap;
             picture.SizeMode = PictureBoxSizeMode.Normal;
-
         }
     }   
 }
