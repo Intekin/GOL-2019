@@ -33,7 +33,7 @@
             this.nud_Y = new System.Windows.Forms.NumericUpDown();
             this.nud_X = new System.Windows.Forms.NumericUpDown();
             this.btn_StartNewGame = new System.Windows.Forms.Button();
-            this.btn_NextGeneration = new System.Windows.Forms.Button();
+            this.btn_Stop = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_New = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,17 +105,17 @@
             this.btn_StartNewGame.UseVisualStyleBackColor = true;
             this.btn_StartNewGame.Click += new System.EventHandler(this.btn_StartNewGame_Click);
             // 
-            // btn_NextGeneration
+            // btn_Stop
             // 
-            this.btn_NextGeneration.Enabled = false;
-            this.btn_NextGeneration.Location = new System.Drawing.Point(293, 28);
-            this.btn_NextGeneration.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_NextGeneration.Name = "btn_NextGeneration";
-            this.btn_NextGeneration.Size = new System.Drawing.Size(50, 20);
-            this.btn_NextGeneration.TabIndex = 3;
-            this.btn_NextGeneration.Text = "Next";
-            this.btn_NextGeneration.UseVisualStyleBackColor = true;
-            this.btn_NextGeneration.Click += new System.EventHandler(this.btn_NextGeneration_Click);
+            this.btn_Stop.Enabled = false;
+            this.btn_Stop.Location = new System.Drawing.Point(293, 28);
+            this.btn_Stop.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Stop.Name = "btn_Stop";
+            this.btn_Stop.Size = new System.Drawing.Size(50, 20);
+            this.btn_Stop.TabIndex = 3;
+            this.btn_Stop.Text = "Stop";
+            this.btn_Stop.UseVisualStyleBackColor = true;
+            this.btn_Stop.Click += new System.EventHandler(this.btn_Stop_Click);
             // 
             // menuStrip1
             // 
@@ -208,7 +208,7 @@
             this.ClientSize = new System.Drawing.Size(1234, 861);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_CellsAlive);
-            this.Controls.Add(this.btn_NextGeneration);
+            this.Controls.Add(this.btn_Stop);
             this.Controls.Add(this.PB_MainView);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.menuStrip1);
@@ -219,6 +219,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Game of Life - 2020";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Y)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_X)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -232,7 +233,7 @@
 
         #endregion
         private System.Windows.Forms.Button btn_StartNewGame;
-        private System.Windows.Forms.Button btn_NextGeneration;
+        private System.Windows.Forms.Button btn_Stop;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

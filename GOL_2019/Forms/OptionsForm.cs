@@ -19,6 +19,7 @@ namespace GOL_2019
 
             CB_ShowDead.Checked = GameSettings.ShowDead;
             CB_ShowGrid.Checked = GameSettings.ShowGrid;
+            nub_UpdateInterval.Value = GameSettings.UpdateInterval;
         }
 
         private void CB_ShowDead_CheckedChanged(object sender, EventArgs e)
@@ -30,6 +31,11 @@ namespace GOL_2019
         private void CB_ShowGrid_CheckedChanged(object sender, EventArgs e)
         {
             GameSettings.ShowGrid = CB_ShowGrid.Checked;
+        }
+
+        private void nub_UpdateInterval_ValueChanged(object sender, EventArgs e)
+        {
+            GameSettings.UpdateInterval = (int)nub_UpdateInterval.Value;
         }
     }
 }

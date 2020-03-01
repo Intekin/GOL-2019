@@ -15,5 +15,7 @@ namespace GOL_2019
         public static int InitialCellsAlive { get; set; } = 1000;
         public static bool ShowDead { get; set; } = false;
         public static bool ShowGrid { get; set; } = true;
+
+        public static int UpdateInterval { get; set; } = 100;
     }
 }

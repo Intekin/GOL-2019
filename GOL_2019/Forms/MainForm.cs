@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace GOL_2019
 {
@@ -12,6 +13,9 @@ namespace GOL_2019
     {
         GameLogic gameLogic;
         GameView gameView;
+        Thread thread;
+
+        bool running = false;
 
         public Form1()
         {
@@ -33,7 +37,7 @@ namespace GOL_2019
 
         private void btn_StartNewGame_Click(object sender, EventArgs e)
         {
-            btn_NextGeneration.Enabled = true;
+            btn_Stop.Enabled = true;
 
             GameSettings.Width = (int)nud_X.Value;
             GameSettings.Height = (int)nud_Y.Value;
@@ -41,22 +45,31 @@ namespace GOL_2019
 
             gameLogic = new GameLogic(GameSettings.Width, GameSettings.Height, GameSettings.InitialCellsAlive);
             gameView.InitGameView(PB_MainView, GameSettings.Width, GameSettings.Height);
-            gameView.UpdateGameView(gameLogic.Grid ,PB_MainView);
+            //gameView.UpdateGameView(gameLogic.Grid ,PB_MainView);
 
-            while (true)
+            running = true;
+
+            thread = new Thread(new ThreadStart(GameLoop));
+            thread.Start();            
+        }
+
+        private void GameLoop()
+        {
+            while (running)
             {
                 gameLogic.Iterate();
                 gameView.UpdateGameView(gameLogic.Grid, PB_MainView);
+                Thread.Sleep(GameSettings.UpdateInterval);
             }
-
         }
 
-        private void btn_NextGeneration_Click(object sender, EventArgs e)
+        private void btn_Stop_Click(object sender, EventArgs e)
         {
-            // Calling Iterate() updates gameLogic.GameGrid which contains the new generation.
-            gameLogic.Iterate();
+            // Calling Iterate() updates gameLogic.GameGrid
+            //gameLogic.Iterate();
+            //gameView.UpdateGameView(gameLogic.Grid, PB_MainView);
 
-            gameView.UpdateGameView(gameLogic.Grid, PB_MainView);
+            running = false;
         }
 
         private void TSMI_Exit_Click(object sender, EventArgs e)
@@ -74,6 +87,11 @@ namespace GOL_2019
         {
             About about = new About();
             about.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            running = false;
         }
     }
 }
