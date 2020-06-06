@@ -9,14 +9,10 @@ Updated GUI - Christoffer
 
 Updated gamelogic - Christoffer
 
-
-Removed DB functionality. 
-
-Faster visual processing. 
-
-Fixed some logic errors in simulation code.
-
-Added an options window with some minor options.
+- Removed DB functionality. 
+- Faster visual processing.
+- Fixed some logic errors in simulation code.
+- Added an options window with some minor options.
 
 
 
