@@ -21,7 +21,9 @@ Version 1.0
 School Assignment
 
 GUI - Sara
+
 Spellogik - Leif, Christoffer
+
 Databas - Sara, Simon
 
 Vi får försöka fylla ut detta allt eftersom. 
