@@ -1,12 +1,26 @@
+
+
+
+
 # GOL-2019
-School Laberation
+Version 1.1
+
+Updated GUI - Christoffer
+Updated gamelogic - Christoffer
+
+Removed DB functionality. 
+Faster visual processing. 
+Fixed some logic errors in simulation code.
+Added an options window with some minor options.
+
+
+
+Version 1.0
+School Assignment
 
 GUI - Sara
-
 Spellogik - Leif, Christoffer
-
 Databas - Sara, Simon
-
 
 Vi får försöka fylla ut detta allt eftersom. 
 
